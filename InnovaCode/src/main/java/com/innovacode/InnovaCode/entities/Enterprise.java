@@ -10,7 +10,7 @@ public class Enterprise {
     private String document;
     private String phone;
     private String address;
-    private User [] users;
+    private Profile [] users;
     private Transaction [] transactions;
     private Date createdAt;
     private Date updatedAt;
@@ -48,7 +48,7 @@ public class Enterprise {
         setUpdatedAt();
     }
 
-    public void setUsers(User[] users) {
+    public void setUsers(Profile[] users) {
         this.users = users;
         setUpdatedAt();
     }
@@ -89,7 +89,7 @@ public class Enterprise {
         return address;
     }
 
-    public User[] getUsers() {
+    public Profile[] getUsers() {
         return users;
     }
 

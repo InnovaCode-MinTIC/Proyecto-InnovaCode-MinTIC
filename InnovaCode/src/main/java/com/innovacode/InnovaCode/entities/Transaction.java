@@ -8,12 +8,12 @@ public class Transaction {
     private long id;
     private String concept;
     private float amount;
-    private User user;
+    private Profile user;
     private Enterprise enterprise;
     private Date createdAt;
     private Date updatedAt;
 
-    public Transaction(long id, String concept, float amount, User user, Enterprise enterprise) {
+    public Transaction(long id, String concept, float amount, Profile user, Enterprise enterprise) {
         this.id = id;
         this.concept = concept;
         this.amount = amount;
@@ -34,7 +34,7 @@ public class Transaction {
         return amount;
     }
 
-    public User getUser() {
+    public Profile getUser() {
         return user;
     }
 
@@ -56,7 +56,7 @@ public class Transaction {
         setUpdatedAt();
     }
 
-    public void setUser(User user) {
+    public void setUser(Profile user) {
         this.user = user;
     }
 
