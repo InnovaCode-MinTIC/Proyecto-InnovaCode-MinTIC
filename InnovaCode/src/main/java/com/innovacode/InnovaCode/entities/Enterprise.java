@@ -1,4 +1,4 @@
-package com.judalpalau.innovacode.entities;
+package com.innovacode.InnovaCode.entities;
 
 import java.time.LocalDate;
 import java.time.ZoneId;

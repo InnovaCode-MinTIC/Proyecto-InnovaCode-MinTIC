@@ -1,15 +1,7 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
-package com.judalpalau.innovacode.entities;
+package com.innovacode.InnovaCode.entities;
 import java.util.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
-/**
- *
- * @author judalpalau
- */
 
 public class Employee {
     
