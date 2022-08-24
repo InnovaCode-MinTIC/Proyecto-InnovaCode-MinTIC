@@ -7,11 +7,11 @@ public class Profile {
     private String id;
     private String image;
     private String phone;
-    private User user;
+    private String user;
     private Date createdAt;
     private Date updatedAt;
     
-    public Profile(String id, String image, String phone, User user, Date createdAt, Date updatedAt) {
+    public Profile(String id, String image, String phone, String user, Date createdAt, Date updatedAt) {
         this.id = id;
         this.image = image;
         this.phone = phone;
@@ -33,7 +33,7 @@ public class Profile {
         setUpdatedAt();
     }
 
-    public void setUser(User user) {
+    public void setUser(String user) {
         this.user = user;
         setUpdatedAt();
     }
@@ -62,7 +62,7 @@ public class Profile {
         return phone;
     }
 
-    public User getUser() {
+    public String getUser() {
         return user;
     }
     
