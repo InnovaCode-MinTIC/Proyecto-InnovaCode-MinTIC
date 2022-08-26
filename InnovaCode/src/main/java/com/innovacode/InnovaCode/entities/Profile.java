@@ -11,7 +11,7 @@ public class Profile {
     private Date createdAt;
     private Date updatedAt;
     
-    public Profile(String id, String image, String phone, String user, Date createdAt, Date updatedAt) {
+    public Profile(String id, String image, String phone, String user) {
         this.id = id;
         this.image = image;
         this.phone = phone;

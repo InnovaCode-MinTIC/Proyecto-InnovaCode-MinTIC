@@ -1,6 +1,8 @@
 package com.innovacode.InnovaCode;
 
 import com.innovacode.InnovaCode.entities.Enterprise;
+import com.innovacode.InnovaCode.entities.Profile;
+import com.innovacode.InnovaCode.entities.Transaction;
 
 import java.util.ArrayList;
 
@@ -43,6 +45,28 @@ public class InnovaCodeApplication {
 		System.out.println("Identificacion original: " + enterprises.get(8).getDocument());
 		enterprises.get(8).setDocument("123.456.789-0");
 		System.out.println("Nueva Identificacion: " + enterprises.get(8).getDocument());
+
+		// Se lee y modifica una Enterprise
+		Enterprise enterprise = new Enterprise(1,"InnovaCode","123456","987456321","calle 13");
+		System.out.println("Datos Empresa");
+		System.out.println("Id: "+enterprise.getId()+", Nombre: "+enterprise.getName()+", NIT: "+enterprise.getDocument()+", Telefono: "+
+				enterprise.getPhone()+", Direccion: "+enterprise.getAddress());
+
+		// Se lee y modifica una Profile
+		Profile profile = new Profile("1","/path", "123456789","Operador");
+		System.out.println("Datos Perfil");
+		System.out.println("Id: "+profile.getId()+", RutaImagen: "+profile.getImage()+", Telefono: "+profile.getPhone()+", Usuario: "+
+				profile.getUser());
+
+
+		// Se lee y modifica una Transaction
+		Transaction transaction = new Transaction(1,"Debito cuenta 123",1000, profile, enterprise);
+		System.out.println("Datos Transaccion");
+		System.out.println("Id: "+transaction.getId()+", Concepto: "+transaction.getConcept()+", monto: "+transaction.getAmount()
+				+", Usuario: "+transaction.getUser().getUser()+", Empresa: "+transaction.getEnterprise().getName());
+
+
+
 	}
 
 }
