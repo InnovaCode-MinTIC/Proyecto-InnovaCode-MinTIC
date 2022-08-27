@@ -23,6 +23,18 @@ public class Profile {
         this.id = id;
     }
 
+    @Override
+    public String toString() {
+        return  "Profile{" +
+                "\n\t id='" + id + '\'' +
+                "\n\t image='" + image + '\'' +
+                "\n\t phone='" + phone + '\'' +
+                "\n\t user='" + user + '\'' +
+                "\n\t createdAt=" + createdAt +
+                "\n\t updatedAt=" + updatedAt +
+                '}';
+    }
+
     public void setImage(String image) {
         this.image = image;
         setUpdatedAt();

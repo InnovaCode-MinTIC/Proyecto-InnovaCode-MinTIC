@@ -1,11 +1,12 @@
 package com.innovacode.InnovaCode.entities;
+import java.util.Arrays;
 import java.util.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
 
 public class Employee {
     
-    private enum Enum_RoleName {
+    public enum Enum_RoleName {
         Admin, Operario;
     }
     
@@ -61,6 +62,7 @@ public class Employee {
 
     public void setId(long id) {
         this.id = id;
+        profile.setId(id+"");
     }
 
     public void setEmail(String email) {
@@ -98,6 +100,18 @@ public class Employee {
         LocalDate localDate = LocalDate.now();
         this.updatedAt = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
     }
-    
-    
+
+    @Override
+    public String toString() {
+        return "\n Employee{" +
+                "\n id=" + id +
+                "\n email='" + email + '\'' +
+                "\n profile=" + profile +
+                "\n role=" + role +
+                "\n enterprise=" + enterprise +
+                "\n transactions=" + Arrays.toString(transactions) +
+                "\n createdAt=" + createdAt +
+                "\n updatedAt=" + updatedAt +
+                '}'+"\n";
+    }
 }

@@ -99,13 +99,13 @@ public class Enterprise {
     
     @Override
     public String toString() {
-        return "Empresa{" +
-                "nombre='" + name + '\'' +
-                ", direccion='" + address + '\'' +
-                ", telefono='" + phone + '\'' +
-                ", nit='" + document + '\'' +
-                ", created_at='" + createdAt + '\'' +
-                ", updated_at='" + updatedAt + '\'' +
+        return  "Empresa{" +
+                "\n\t nombre='" + name + '\'' +
+                "\n\t direccion='" + address + '\'' +
+                "\n\t telefono='" + phone + '\'' +
+                "\n\t nit='" + document + '\'' +
+                "\n\t created_at='" + createdAt + '\'' +
+                "\n\t updated_at='" + updatedAt + '\'' +
                 '}';
     }
 }

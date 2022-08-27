@@ -75,5 +75,17 @@ public class Transaction {
         LocalDate localDate = LocalDate.now();
         this.updatedAt = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
     }
+    @Override
+    public String toString() {
+        return "Transaction{" +
+                "\n\t id=" + id +
+                "\n\t concept='" + concept + '\'' +
+                "\n\t amount=" + amount +
+                "\n\t user=" + user.getUser() +
+                "\n\t enterprise=" + enterprise.getName() +
+                "\n\t createdAt=" + createdAt +
+                "\n\t updatedAt=" + updatedAt +
+                '}';
+    }
     
 }
