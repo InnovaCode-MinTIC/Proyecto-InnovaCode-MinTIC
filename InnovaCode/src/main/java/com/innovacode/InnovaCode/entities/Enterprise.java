@@ -1,19 +1,41 @@
 package com.innovacode.InnovaCode.entities;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.Arrays;
 import java.util.Date;
+import java.util.List;
 
+@Entity
+@Table(name = "enterprise")
 public class Enterprise {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private long id;
+    @Column(name = "name", nullable = false, length = 50)
     private String name;
+    @Column(name = "document", nullable = false, length = 50)
     private String document;
+    @Column(name = "phone", nullable = false, length = 50)
     private String phone;
+    @Column(name = "addres", nullable = false, length = 50)
     private String address;
-    private Profile [] users;
-    private Transaction [] transactions;
+
+    @OneToMany(mappedBy = "enterprise")
+    List<Employee> employee;
+
+    @OneToMany(mappedBy = "enterprise")
+    List<Transaction> transactions;
+    //private Transaction [] transactions;
+    @Column(name = "createdAt", nullable = false, length = 50)
     private Date createdAt;
+    @Column(name = "updatedAt", nullable = false, length = 50)
     private Date updatedAt;
+
+    public Enterprise() {
+    }
 
     public Enterprise(long id, String name, String document, String phone, String address) {
         this.id = id;
@@ -48,13 +70,8 @@ public class Enterprise {
         setUpdatedAt();
     }
 
-    public void setUsers(Profile[] users) {
-        this.users = users;
-        setUpdatedAt();
-    }
-
-    public void setTransactions(Transaction[] transactions) {
-        this.transactions = transactions;
+     public void setTransactions(Transaction[] transactions) {
+        this.transactions = Arrays.asList(transactions);
     }
 
     private void setCreatedAt() {
@@ -89,11 +106,7 @@ public class Enterprise {
         return address;
     }
 
-    public Profile[] getUsers() {
-        return users;
-    }
-
-    public Transaction[] getTransactions() {
+    public List<Transaction> getTransactions() {
         return transactions;
     }
     
