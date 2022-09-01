@@ -1,16 +1,30 @@
 package com.innovacode.InnovaCode.entities;
+
+import javax.persistence.*;
 import java.util.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
 
+@Entity
+@Table(name="profile")
 public class Profile {
+
+    @Id
     private String id;
+    @Column
     private String image;
+    @Column
     private String phone;
+    @Column
     private String user;
+    @Column
     private Date createdAt;
+    @Column
     private Date updatedAt;
-    
+
+    public Profile() {
+    }
+
     public Profile(String id, String image, String phone, String user) {
         this.id = id;
         this.image = image;
@@ -21,18 +35,6 @@ public class Profile {
 
     public void setId(String id) {
         this.id = id;
-    }
-
-    @Override
-    public String toString() {
-        return  "Profile{" +
-                "\n\t id='" + id + '\'' +
-                "\n\t image='" + image + '\'' +
-                "\n\t phone='" + phone + '\'' +
-                "\n\t user='" + user + '\'' +
-                "\n\t createdAt=" + createdAt +
-                "\n\t updatedAt=" + updatedAt +
-                '}';
     }
 
     public void setImage(String image) {
@@ -77,5 +79,16 @@ public class Profile {
     public String getUser() {
         return user;
     }
-    
+
+    @Override
+    public String toString() {
+        return "Profile{" +
+                "\n\t id='" + id + '\'' +
+                "\n\t image='" + image + '\'' +
+                "\n\t phone='" + phone + '\'' +
+                "\n\t user='" + user + '\'' +
+                "\n\t createdAt=" + createdAt +
+                "\n\t updatedAt=" + updatedAt +
+                '}';
+    }
 }
