@@ -1,40 +1,52 @@
 package com.innovacode.InnovaCode.entities;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
-
 @Entity
-@Table(name="profile")
+@Table(name = "profile")
 public class Profile {
-
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, length = 50)
     private String id;
-    @Column
+    @Column(name = "image", nullable = false, length = 150)
     private String image;
-    @Column
+    @Column(name = "phone", nullable = false, length = 20)
     private String phone;
-    @Column
-    private String user;
-    @Column
+    @OneToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
+    @Column(name = "createdAt", nullable = false, length = 50)
     private Date createdAt;
-    @Column
+    @Column(name = "updatedAt", nullable = false, length = 50)
     private Date updatedAt;
 
     public Profile() {
     }
 
-    public Profile(String id, String image, String phone, String user) {
+    public Profile(String id, String image, String phone, Employee employee) {
         this.id = id;
         this.image = image;
         this.phone = phone;
-        this.user = user;
+        this.employee = employee;
         setCreatedAt();
     }
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    @Override
+    public String toString() {
+        return  "Profile{" +
+                "\n\t id='" + id + '\'' +
+                "\n\t image='" + image + '\'' +
+                "\n\t phone='" + phone + '\'' +
+                "\n\t employee='" + employee + '\'' +
+                "\n\t createdAt=" + createdAt +
+                "\n\t updatedAt=" + updatedAt +
+                '}';
     }
 
     public void setImage(String image) {
@@ -47,9 +59,8 @@ public class Profile {
         setUpdatedAt();
     }
 
-    public void setUser(String user) {
-        this.user = user;
-        setUpdatedAt();
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     private void setCreatedAt() {
@@ -76,19 +87,7 @@ public class Profile {
         return phone;
     }
 
-    public String getUser() {
-        return user;
-    }
-
-    @Override
-    public String toString() {
-        return "Profile{" +
-                "\n\t id='" + id + '\'' +
-                "\n\t image='" + image + '\'' +
-                "\n\t phone='" + phone + '\'' +
-                "\n\t user='" + user + '\'' +
-                "\n\t createdAt=" + createdAt +
-                "\n\t updatedAt=" + updatedAt +
-                '}';
+    public Employee getEmployee() {
+        return employee;
     }
 }

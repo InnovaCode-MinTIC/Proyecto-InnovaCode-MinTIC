@@ -1,23 +1,37 @@
 package com.innovacode.InnovaCode.entities;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
-
+@Entity
+@Table(name = "transaction")
 public class Transaction {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false, length = 50)
     private long id;
+    @Column(name = "concept", nullable = false, length = 50)
     private String concept;
+    @Column(name = "amount", nullable = false, length = 50)
     private float amount;
-    private Profile user;
+    @ManyToOne
+    @JoinColumn(name = "employee_id")
+    private Employee employee;
+    @ManyToOne
+    @JoinColumn(name = "enterprise_id")
     private Enterprise enterprise;
     private Date createdAt;
     private Date updatedAt;
+
+    public Transaction() {
+    }
 
     public Transaction(long id, String concept, float amount, Profile user, Enterprise enterprise) {
         this.id = id;
         this.concept = concept;
         this.amount = amount;
-        this.user = user;
+        this.employee = employee;
         this.enterprise = enterprise;
         setCreatedAt();
     }
@@ -34,8 +48,8 @@ public class Transaction {
         return amount;
     }
 
-    public Profile getUser() {
-        return user;
+    public Employee getEmployee() {
+        return employee;
     }
 
     public Enterprise getEnterprise() {
@@ -56,8 +70,8 @@ public class Transaction {
         setUpdatedAt();
     }
 
-    public void setUser(Profile user) {
-        this.user = user;
+    public void setEmployee(Employee employee) {
+        this.employee = employee;
     }
 
     public void setEnterprise(Enterprise enterprise) {
@@ -81,7 +95,7 @@ public class Transaction {
                 "\n\t id=" + id +
                 "\n\t concept='" + concept + '\'' +
                 "\n\t amount=" + amount +
-                "\n\t user=" + user.getUser() +
+                "\n\t user=" + employee +
                 "\n\t enterprise=" + enterprise.getName() +
                 "\n\t createdAt=" + createdAt +
                 "\n\t updatedAt=" + updatedAt +

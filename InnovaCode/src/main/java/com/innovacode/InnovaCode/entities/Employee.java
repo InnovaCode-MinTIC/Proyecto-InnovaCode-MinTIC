@@ -1,22 +1,45 @@
 package com.innovacode.InnovaCode.entities;
+
+
+import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
+import java.util.List;
 
+@Entity
+@Table(name = "employee")
 public class Employee {
-    
+
+
+    public Employee() {
+    }
+
     public enum Enum_RoleName {
         Admin, Operario;
     }
-    
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private long id;
+
+    @Column(name = "email", nullable = false, length = 50)
     private String email;
+    @OneToOne(mappedBy = "employee")
     private Profile profile;
+    @Column(name = "role", nullable = false)
+    @Enumerated(value = EnumType.STRING)
     private Enum_RoleName role;
+    @ManyToOne
+    @JoinColumn(name = "enterprise_id")
     private Enterprise enterprise;
-    private Transaction [] transactions;
-    private Date createdAt;
+    @OneToMany(mappedBy = "employee")
+    List<Transaction> transactions;
+    @Column(name = "createdAt")
+        private Date createdAt;
+    @Column(name = "updatedAt")
     private Date updatedAt;
 
     public Employee(long id, String email, Profile profile, Enum_RoleName role, Enterprise enterprise) {
@@ -46,10 +69,6 @@ public class Employee {
 
     public Enterprise getEnterprise() {
         return enterprise;
-    }
-
-    public Transaction[] getTransactions() {
-        return transactions;
     }
 
     public Date getCreatedAt() {
@@ -85,10 +104,6 @@ public class Employee {
         setUpdatedAt();
     }
 
-    public void setTransactions(Transaction[] transactions) {
-        this.transactions = transactions;
-    }
-
     private void setCreatedAt() {
         ZoneId defaultZoneId = ZoneId.systemDefault();
         LocalDate localDate = LocalDate.now();
@@ -109,9 +124,17 @@ public class Employee {
                 "\n profile=" + profile +
                 "\n role=" + role +
                 "\n enterprise=" + enterprise +
-                "\n transactions=" + Arrays.toString(transactions) +
+                "\n transactions=" + Arrays.toString(new List[]{transactions}) +
                 "\n createdAt=" + createdAt +
                 "\n updatedAt=" + updatedAt +
                 '}'+"\n";
+    }
+
+    public List<Transaction> getTransactions() {
+        return transactions;
+    }
+
+    public void setTransactions(List<Transaction> transactions) {
+        this.transactions = transactions;
     }
 }
