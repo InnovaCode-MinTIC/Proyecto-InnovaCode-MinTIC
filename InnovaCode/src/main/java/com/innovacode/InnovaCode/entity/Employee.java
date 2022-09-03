@@ -1,4 +1,4 @@
-package com.innovacode.InnovaCode.entities;
+package com.innovacode.InnovaCode.entity;
 
 
 import javax.persistence.*;
@@ -33,7 +33,7 @@ public class Employee {
     @Enumerated(value = EnumType.STRING)
     private Enum_RoleName role;
     @ManyToOne
-    @JoinColumn(name = "enterprise_id")
+    @JoinColumn(name = "id", insertable = false, updatable = false)
     private Enterprise enterprise;
     @OneToMany(mappedBy = "employee")
     List<Transaction> transactions;

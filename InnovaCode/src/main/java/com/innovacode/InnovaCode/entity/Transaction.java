@@ -1,4 +1,4 @@
-package com.innovacode.InnovaCode.entities;
+package com.innovacode.InnovaCode.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -16,10 +16,10 @@ public class Transaction {
     @Column(name = "amount", nullable = false, length = 50)
     private float amount;
     @ManyToOne
-    @JoinColumn(name = "employee_id")
+    @JoinColumn(name = "id", insertable = false, updatable = false)
     private Employee employee;
     @ManyToOne
-    @JoinColumn(name = "enterprise_id")
+    @JoinColumn(name = "id", insertable = false, updatable = false)
     private Enterprise enterprise;
     private Date createdAt;
     private Date updatedAt;
