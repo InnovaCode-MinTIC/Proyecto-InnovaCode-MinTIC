@@ -1,4 +1,4 @@
-package com.innovacode.InnovaCode.entities;
+package com.innovacode.InnovaCode.entity;
 import javax.persistence.*;
 import java.util.Date;
 import java.time.LocalDate;
@@ -15,7 +15,7 @@ public class Profile {
     @Column(name = "phone", nullable = false, length = 20)
     private String phone;
     @OneToOne
-    @JoinColumn(name = "employee_id")
+    @JoinColumn(name = "id", insertable = false, updatable = false)
     private Employee employee;
     @Column(name = "createdAt", nullable = false, length = 50)
     private Date createdAt;

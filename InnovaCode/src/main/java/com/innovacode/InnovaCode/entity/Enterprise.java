@@ -1,4 +1,4 @@
-package com.innovacode.InnovaCode.entities;
+package com.innovacode.InnovaCode.entity;
 
 import javax.persistence.*;
 import java.time.LocalDate;
@@ -29,9 +29,9 @@ public class Enterprise {
     @OneToMany(mappedBy = "enterprise")
     List<Transaction> transactions;
     //private Transaction [] transactions;
-    @Column(name = "createdAt", nullable = false, length = 50)
+    @Column(name = "createdAt", length = 50)
     private Date createdAt;
-    @Column(name = "updatedAt", nullable = false, length = 50)
+    @Column(name = "updatedAt", length = 50)
     private Date updatedAt;
 
     public Enterprise() {
@@ -53,6 +53,7 @@ public class Enterprise {
     public void setName(String name) {
         this.name = name;
         setUpdatedAt();
+        setCreatedAt();
     }
 
     public void setDocument(String document) {
@@ -109,16 +110,31 @@ public class Enterprise {
     public List<Transaction> getTransactions() {
         return transactions;
     }
-    
+
+    public List<Employee> getEmployee() {
+        return employee;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
     @Override
     public String toString() {
-        return  "Empresa{" +
-                "\n\t nombre='" + name + '\'' +
-                "\n\t direccion='" + address + '\'' +
-                "\n\t telefono='" + phone + '\'' +
-                "\n\t nit='" + document + '\'' +
-                "\n\t created_at='" + createdAt + '\'' +
-                "\n\t updated_at='" + updatedAt + '\'' +
+        return "Enterprise{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", document='" + document + '\'' +
+                ", phone='" + phone + '\'' +
+                ", address='" + address + '\'' +
+                ", employee=" + employee +
+                ", transactions=" + transactions +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
                 '}';
     }
 }
