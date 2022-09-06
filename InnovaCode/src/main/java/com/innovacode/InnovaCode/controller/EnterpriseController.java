@@ -2,7 +2,7 @@ package com.innovacode.InnovaCode.controller;
 
 import com.innovacode.InnovaCode.entity.Enterprise;
 import com.innovacode.InnovaCode.service.EnterpriseService;
-import org.jetbrains.annotations.NotNull;
+//import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
