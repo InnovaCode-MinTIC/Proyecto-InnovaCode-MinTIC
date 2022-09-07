@@ -1,19 +1,43 @@
 package com.innovacode.InnovaCode.entities;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
 
+@Entity
+@Table(name = "enterprise")
 public class Enterprise {
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    @Column(name = "name")
     private String name;
+
+    @Column(name = "document")
     private String document;
+
+    @Column(name = "phone")
     private String phone;
+
+    @Column(name = "address")
     private String address;
+
+    @Column(name = "users")
     private Profile [] users;
+
+    @Column(name = "transactions")
     private Transaction [] transactions;
+
+    @Column(name = "createdAt")
     private Date createdAt;
+
+    @Column(name = "updatedAt")
     private Date updatedAt;
+
+    public Enterprise() {
+    }
 
     public Enterprise(long id, String name, String document, String phone, String address) {
         this.id = id;
