@@ -25,10 +25,10 @@ public class Enterprise {
     private String address;
 
     @Column(name = "users")
-    private Profile [] users;
+    private Profile[] users;
 
     @Column(name = "transactions")
-    private Transaction [] transactions;
+    private Transaction[] transactions;
 
     @Column(name = "createdAt")
     private Date createdAt;

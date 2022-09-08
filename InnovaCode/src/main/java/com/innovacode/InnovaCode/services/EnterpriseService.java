@@ -11,23 +11,27 @@ public class EnterpriseService {
 
     private EnterpriseRepository repository;
 
-    public List<Enterprise> getEnterpriseList(){
+    public EnterpriseService(EnterpriseRepository repository) {
+        this.repository = repository;
+    }
+
+    public List<Enterprise> getEnterpriseList() {
         return this.repository.findAll();
     }
 
-    public Enterprise postEnterprise(Enterprise enterprise){
+    public Enterprise postEnterprise(Enterprise enterprise) {
         return this.repository.save(enterprise);
     }
 
-    public Enterprise getEnterpriseById(Long id){
+    public Enterprise getEnterpriseById(Long id) {
         return this.repository.findById(id).get();
     }
 
-    public Enterprise patchEnterprise(Enterprise enterprise){
+    public Enterprise patchEnterprise(Enterprise enterprise) {
         return this.repository.save(enterprise);
     }
 
-    public void deleteEnterprise(Long id){
+    public void deleteEnterprise(Long id) {
         this.repository.deleteById(id);
     }
 

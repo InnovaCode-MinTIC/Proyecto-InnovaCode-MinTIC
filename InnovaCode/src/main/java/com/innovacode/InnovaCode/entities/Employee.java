@@ -1,23 +1,39 @@
 package com.innovacode.InnovaCode.entities;
+import javax.persistence.*;
 import java.util.Arrays;
 import java.util.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
 
+@Entity
+@Table(name = "employee")
 public class Employee {
     
     public enum Enum_RoleName {
         Admin, Operario;
     }
-    
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    @Column
     private String email;
+
     private Profile profile;
+    @Column
     private Enum_RoleName role;
+
     private Enterprise enterprise;
+
     private Transaction [] transactions;
+    @Column
     private Date createdAt;
+    @Column
     private Date updatedAt;
+
+    public Employee() {
+    }
 
     public Employee(long id, String email, Profile profile, Enum_RoleName role, Enterprise enterprise) {
         this.id = id;

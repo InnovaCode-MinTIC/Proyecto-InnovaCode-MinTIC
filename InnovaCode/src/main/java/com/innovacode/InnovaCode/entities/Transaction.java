@@ -1,10 +1,15 @@
 package com.innovacode.InnovaCode.entities;
 
+import javax.persistence.*;
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
-
+@Entity
+@Table(name ="transaction")
 public class Transaction {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
     private String concept;
     private float amount;
@@ -12,6 +17,9 @@ public class Transaction {
     private Enterprise enterprise;
     private Date createdAt;
     private Date updatedAt;
+
+    public Transaction() {
+    }
 
     public Transaction(long id, String concept, float amount, Profile user, Enterprise enterprise) {
         this.id = id;

@@ -1,16 +1,25 @@
 package com.innovacode.InnovaCode.entities;
+import javax.persistence.*;
 import java.util.Date;
 import java.time.LocalDate;
 import java.time.ZoneId;
 
+@Entity
+@Table(name = "profile")
 public class Profile {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
     private String image;
     private String phone;
     private String user;
     private Date createdAt;
     private Date updatedAt;
-    
+
+    public Profile() {
+    }
+
     public Profile(String id, String image, String phone, String user) {
         this.id = id;
         this.image = image;
