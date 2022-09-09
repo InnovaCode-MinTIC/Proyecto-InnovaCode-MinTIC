@@ -1,14 +1,40 @@
 package com.innovacode.InnovaCode.controllers;
 
+import com.innovacode.InnovaCode.entities.Transaction;
 import com.innovacode.InnovaCode.services.TransactionService;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 public class TransactionController {
 
+    @Autowired
     private TransactionService service;
 
-    public TransactionController(TransactionService service){
-        this.service = service;
+    @GetMapping("/transactions")
+    public List<Transaction> getTransactionList(){
+        return this.service.getTransactionList();
+    }
+
+    @PostMapping("/transactions")
+    public Transaction postTransaction(@RequestBody Transaction transaction){
+        return this.service.postTransaction(transaction);
+    }
+
+    @GetMapping("/transactions/{id}")
+    public Transaction getTransactionById(@PathVariable Long id){
+        return this.service.getTransactionById(id);
+    }
+
+    @PatchMapping("/transactions/{id}")
+    public Transaction patchTransaction(@PathVariable Long id, @RequestBody Transaction transaction){
+        return this.service.patchTransaction(id,transaction);
+    }
+
+    @DeleteMapping("/transactions/{id}")
+    public void deleteTransaction(@PathVariable Long id){
+        this.service.deleteTransaction(id);
     }
 }

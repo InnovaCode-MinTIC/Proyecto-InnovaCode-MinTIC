@@ -27,7 +27,7 @@ public class ProfileService {
         return this.repository.findById(id).get();
     }
 
-    public Profile patchProfile(Profile profile){
+    public Profile patchProfile(String id, Profile profile){
         return this.repository.save(profile);
     }
 

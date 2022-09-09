@@ -27,7 +27,8 @@ public class TransactionService {
         return this.repository.findById(id).get();
     }
 
-    public Transaction patchTransaction(Transaction transaction){
+    public Transaction patchTransaction(Long id, Transaction transaction){
+
         return this.repository.save(transaction);
     }
 

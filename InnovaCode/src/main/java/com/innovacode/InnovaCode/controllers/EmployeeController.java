@@ -2,6 +2,7 @@ package com.innovacode.InnovaCode.controllers;
 
 import com.innovacode.InnovaCode.entities.Employee;
 import com.innovacode.InnovaCode.services.EmployeeService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -9,11 +10,8 @@ import java.util.List;
 @RestController
 public class EmployeeController {
 
+    @Autowired
     private EmployeeService service;
-
-    public EmployeeController(EmployeeService service){
-        this.service = service;
-    }
 
     @GetMapping("/users")
     public List<Employee> getEmployeeList(){
@@ -32,8 +30,7 @@ public class EmployeeController {
 
     @PatchMapping("/users/{id}")
     public Employee patchEmployee(@PathVariable Long id,@RequestBody Employee employee){
-        Employee newEmployee = this.service.getEmployeeById(id);
-        return this.service.patchEmployee(newEmployee);
+        return this.service.patchEmployee(id,employee);
     }
 
     @DeleteMapping("/users/{id}")

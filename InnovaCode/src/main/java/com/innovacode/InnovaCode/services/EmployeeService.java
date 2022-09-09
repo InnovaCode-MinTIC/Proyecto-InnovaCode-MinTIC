@@ -27,8 +27,11 @@ public class EmployeeService {
         return this.repository.findById(id).get();
     }
 
-    public Employee patchEmployee(Employee employee){
-        return this.repository.save(employee);
+    public Employee patchEmployee(Long id, Employee employee){
+        Employee newEmployee = getEmployeeById(id);
+        newEmployee.setId(employee.getId());
+
+        return this.repository.save(newEmployee);
     }
 
     public void deleteEmployee(Long id){

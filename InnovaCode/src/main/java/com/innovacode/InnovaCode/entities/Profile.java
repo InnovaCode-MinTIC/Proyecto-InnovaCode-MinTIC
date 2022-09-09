@@ -13,50 +13,70 @@ public class Profile {
     private String id;
     private String image;
     private String phone;
-    private String user;
+
+    @OneToOne
+    private Employee user;
     private Date createdAt;
     private Date updatedAt;
 
     public Profile() {
     }
 
-    public Profile(String id, String image, String phone, String user) {
+    public Profile(String id, String image, String phone, Employee user, Date createdAt, Date updatedAt) {
         this.id = id;
         this.image = image;
         this.phone = phone;
         this.user = user;
-        setCreatedAt();
+        this.createdAt = createdAt;
+        this.updatedAt = updatedAt;
+    }
+
+    public String getId() {
+        return id;
     }
 
     public void setId(String id) {
         this.id = id;
     }
 
-    @Override
-    public String toString() {
-        return  "Profile{" +
-                "\n\t id='" + id + '\'' +
-                "\n\t image='" + image + '\'' +
-                "\n\t phone='" + phone + '\'' +
-                "\n\t user='" + user + '\'' +
-                "\n\t createdAt=" + createdAt +
-                "\n\t updatedAt=" + updatedAt +
-                '}';
+    public String getImage() {
+        return image;
     }
 
     public void setImage(String image) {
         this.image = image;
-        setUpdatedAt();
+    }
+
+    public String getPhone() {
+        return phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
-        setUpdatedAt();
     }
 
-    public void setUser(String user) {
+    public Employee getUser() {
+        return user;
+    }
+
+    public void setUser(Employee user) {
         this.user = user;
-        setUpdatedAt();
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public void setCreatedAt(Date createdAt) {
+        this.createdAt = createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
+    }
+
+    public void setUpdatedAt(Date updatedAt) {
+        this.updatedAt = updatedAt;
     }
 
     private void setCreatedAt() {
@@ -71,20 +91,15 @@ public class Profile {
         this.updatedAt = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
     }
 
-    public String getId() {
-        return id;
+    @Override
+    public String toString() {
+        return "Profile{" +
+                "id='" + id + '\'' +
+                ", image='" + image + '\'' +
+                ", phone='" + phone + '\'' +
+                ", user=" + user +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
     }
-
-    public String getImage() {
-        return image;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public String getUser() {
-        return user;
-    }
-    
 }

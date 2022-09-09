@@ -27,8 +27,15 @@ public class EnterpriseService {
         return this.repository.findById(id).get();
     }
 
-    public Enterprise patchEnterprise(Enterprise enterprise) {
-        return this.repository.save(enterprise);
+    public Enterprise patchEnterprise(Long id, Enterprise enterprise) {
+        Enterprise newEnterprise = getEnterpriseById(id);
+        newEnterprise.setId(id);
+        newEnterprise.setName(enterprise.getName());
+        newEnterprise.setDocument(enterprise.getDocument());
+        newEnterprise.setPhone(enterprise.getPhone());
+        newEnterprise.setAddress(enterprise.getAddress());
+
+        return this.repository.save(newEnterprise);
     }
 
     public void deleteEnterprise(Long id) {
