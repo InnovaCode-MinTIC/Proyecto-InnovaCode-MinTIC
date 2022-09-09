@@ -28,7 +28,13 @@ public class ProfileService {
     }
 
     public Profile patchProfile(String id, Profile profile){
-        return this.repository.save(profile);
+        Profile newProfile = getProfileById(id);
+        newProfile.setId(id);
+        newProfile.setImage(profile.getImage());
+        newProfile.setPhone(profile.getPhone());
+        newProfile.setUser(profile.getUser());
+
+        return this.repository.save(newProfile);
     }
 
     public void deleteProfile(String id){

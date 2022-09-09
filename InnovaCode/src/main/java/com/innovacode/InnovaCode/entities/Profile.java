@@ -11,12 +11,20 @@ public class Profile {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private String id;
+
+    @Column(name = "image")
     private String image;
+
+    @Column(name = "phone")
     private String phone;
 
     @OneToOne
     private Employee user;
+
+    @Column(name = "createdAt")
     private Date createdAt;
+
+    @Column(name = "updatedAt")
     private Date updatedAt;
 
     public Profile() {

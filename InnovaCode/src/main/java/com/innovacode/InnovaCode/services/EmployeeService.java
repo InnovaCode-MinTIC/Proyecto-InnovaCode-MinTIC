@@ -29,7 +29,10 @@ public class EmployeeService {
 
     public Employee patchEmployee(Long id, Employee employee){
         Employee newEmployee = getEmployeeById(id);
-        newEmployee.setId(employee.getId());
+        newEmployee.setId(id);
+        newEmployee.setEmail(employee.getEmail());
+        newEmployee.setRole(employee.getRole());
+        newEmployee.setEnterprise(employee.getEnterprise());
 
         return this.repository.save(newEmployee);
     }

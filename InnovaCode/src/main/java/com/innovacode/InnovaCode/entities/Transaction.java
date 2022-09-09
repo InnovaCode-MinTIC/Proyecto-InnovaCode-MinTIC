@@ -25,7 +25,10 @@ public class Transaction {
 
     @ManyToOne
     private Enterprise enterprise;
+
+    @Column(name ="createdAt")
     private Date createdAt;
+    @Column(name="updatedAt")
     private Date updatedAt;
 
     public Transaction() {

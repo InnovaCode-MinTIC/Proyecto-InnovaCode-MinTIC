@@ -13,10 +13,10 @@ public class Enterprise {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "name")
+    @Column(name = "name",unique = true)
     private String name;
 
-    @Column(name = "document")
+    @Column(name = "document",unique = true)
     private String document;
 
     @Column(name = "phone")

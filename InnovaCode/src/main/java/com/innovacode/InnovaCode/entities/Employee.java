@@ -16,7 +16,7 @@ public class Employee {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column
+    @Column(name = "email",unique = true)
     private String email;
 
     @OneToOne
@@ -31,9 +31,9 @@ public class Employee {
 
     @OneToMany
     private List<Transaction> transactions;
-    @Column
+    @Column(name = "createdAt")
     private Date createdAt;
-    @Column
+    @Column(name = "updatedAt")
     private Date updatedAt;
 
     public Employee() {

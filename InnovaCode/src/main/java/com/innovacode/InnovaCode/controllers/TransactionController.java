@@ -37,4 +37,9 @@ public class TransactionController {
     public void deleteTransaction(@PathVariable Long id){
         this.service.deleteTransaction(id);
     }
+
+    @GetMapping("/enterprises/{id}/movements")
+    public Transaction getTransactionByEnterprise(@PathVariable Long id){
+        return this.getTransactionByEnterprise(id);
+    }
 }
