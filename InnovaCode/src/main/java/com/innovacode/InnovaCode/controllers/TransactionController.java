@@ -39,7 +39,7 @@ public class TransactionController {
     }
 
     @GetMapping("/enterprises/{id}/movements")
-    public Transaction getTransactionByEnterprise(@PathVariable Long id){
-        return this.getTransactionByEnterprise(id);
+    public List<Transaction> getTransactionByEnterprise(@PathVariable Long id){
+        return this.service.getTransactionByEnterprise(id);
     }
 }

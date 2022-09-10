@@ -46,10 +46,9 @@ public class TransactionService {
         this.repository.deleteById(id);
     }
 
-    public Transaction getTransactionByEnterprise(Long id){
-        Enterprise enterprise2 = new Enterprise();
-        enterprise2 = enterpriseRepository.findById(id).get();
-
-        return this.repository.findByEnterprise(Enterprise enterprise2);
+    public List<Transaction> getTransactionByEnterprise(Long id){
+        Enterprise enterprise = new Enterprise();
+        enterprise.setId(id);
+        return this.repository.findByEnterprise(enterprise);
     }
 }
