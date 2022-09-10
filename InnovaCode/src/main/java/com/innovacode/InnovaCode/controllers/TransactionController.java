@@ -13,27 +13,27 @@ public class TransactionController {
     @Autowired
     private TransactionService service;
 
-    @GetMapping("/transactions")
+    @GetMapping("/movements")
     public List<Transaction> getTransactionList(){
         return this.service.getTransactionList();
     }
 
-    @PostMapping("/transactions")
+    @PostMapping("/movements")
     public Transaction postTransaction(@RequestBody Transaction transaction){
         return this.service.postTransaction(transaction);
     }
 
-    @GetMapping("/transactions/{id}")
+    @GetMapping("/movements/{id}")
     public Transaction getTransactionById(@PathVariable Long id){
         return this.service.getTransactionById(id);
     }
 
-    @PatchMapping("/transactions/{id}")
+    @PatchMapping("/movements/{id}")
     public Transaction patchTransaction(@PathVariable Long id, @RequestBody Transaction transaction){
         return this.service.patchTransaction(id,transaction);
     }
 
-    @DeleteMapping("/transactions/{id}")
+    @DeleteMapping("/movements/{id}")
     public void deleteTransaction(@PathVariable Long id){
         this.service.deleteTransaction(id);
     }

@@ -24,9 +24,6 @@ public class TransactionService {
     }
 
     public Transaction postTransaction(Transaction transaction) {
-//        Enterprise enterprise = new Enterprise();
-//        enterprise = enterpriseRepository.findById(transaction.getEnterprise().getId()).get();
-//        transaction.setEnterprise(enterprise);
         return this.repository.save(transaction);
     }
 
@@ -37,8 +34,10 @@ public class TransactionService {
     public Transaction patchTransaction(Long id, Transaction transaction){
         Transaction newTransaction = getTransactionById(id);
         newTransaction.setId(id);
-        newTransaction.setConcept(transaction.getConcept());
-
+        if(transaction.getConcept() != null) newTransaction.setConcept(transaction.getConcept());
+        //if(transaction.getAmount() != null)
+        newTransaction.setAmount(transaction.getAmount());
+        if(transaction.getEnterprise() != null) newTransaction.setEnterprise(transaction.getEnterprise());
         return this.repository.save(newTransaction);
     }
 

@@ -3,9 +3,9 @@ package com.innovacode.InnovaCode.entities;
 import com.innovacode.InnovaCode.enums.Enum_RoleName;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
 import java.util.Date;
-import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.List;
 
 @Entity
@@ -19,9 +19,6 @@ public class Employee {
     @Column(name = "email",unique = true)
     private String email;
 
-    @OneToOne
-    private Profile profile;
-
     @Enumerated(EnumType.STRING)
     @Column(name = "role")
     private Enum_RoleName role;
@@ -31,6 +28,10 @@ public class Employee {
 
     @OneToMany
     private List<Transaction> transactions;
+    @Column(name = "image")
+    private String image;
+    @Column(name = "phone")
+    private String phone;
     @Column(name = "createdAt")
     private Date createdAt;
     @Column(name = "updatedAt")
@@ -39,15 +40,15 @@ public class Employee {
     public Employee() {
     }
 
-    public Employee(long id, String email, Profile profile, Enum_RoleName role, Enterprise enterprise, List<Transaction> transactions, Date createdAt, Date updatedAt) {
+    public Employee(long id, String email, Enum_RoleName role, String image, String phone, Enterprise enterprise, List<Transaction> transactions, Date createdAt, Date updatedAt) {
         this.id = id;
         this.email = email;
-        this.profile = profile;
+        this.image = image;
+        this.phone = phone;
         this.role = role;
         this.enterprise = enterprise;
         this.transactions = transactions;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        setCreatedAt();
     }
 
     public long getId() {
@@ -63,15 +64,26 @@ public class Employee {
     }
 
     public void setEmail(String email) {
+        setUpdatedAt();
         this.email = email;
     }
 
-    public Profile getProfile() {
-        return profile;
+    public String getImage() {
+        return image;
     }
 
-    public void setProfile(Profile profile) {
-        this.profile = profile;
+    public void setImage(String image) {
+        setUpdatedAt();
+        this.image = image;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        setUpdatedAt();
+        this.phone = phone;
     }
 
     public Enum_RoleName getRole() {
@@ -87,6 +99,7 @@ public class Employee {
     }
 
     public void setEnterprise(Enterprise enterprise) {
+        setUpdatedAt();
         this.enterprise = enterprise;
     }
 
@@ -95,6 +108,7 @@ public class Employee {
     }
 
     public void setTransactions(List<Transaction> transactions) {
+        setUpdatedAt();
         this.transactions = transactions;
     }
 
@@ -102,28 +116,19 @@ public class Employee {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
 
-    private void setCreatedAt() {
-        ZoneId defaultZoneId = ZoneId.systemDefault();
-        LocalDate localDate = LocalDate.now();
-        this.createdAt = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
+    public void setCreatedAt() {
+        LocalDateTime localDate = LocalDateTime.now(ZoneOffset.UTC);
+        this.createdAt = Date.from(localDate.toInstant(ZoneOffset.of("-05:00")));
     }
 
     public void setUpdatedAt() {
-        ZoneId defaultZoneId = ZoneId.systemDefault();
-        LocalDate localDate = LocalDate.now();
-        this.updatedAt = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
+        LocalDateTime localDate = LocalDateTime.now(ZoneOffset.UTC);
+        this.updatedAt = Date.from(localDate.toInstant(ZoneOffset.of("-05:00")));
     }
 
     @Override
@@ -131,7 +136,6 @@ public class Employee {
         return "Employee{" +
                 "id=" + id +
                 ", email='" + email + '\'' +
-                ", profile=" + profile +
                 ", role=" + role +
                 ", enterprise=" + enterprise +
                 ", transactions=" + transactions +

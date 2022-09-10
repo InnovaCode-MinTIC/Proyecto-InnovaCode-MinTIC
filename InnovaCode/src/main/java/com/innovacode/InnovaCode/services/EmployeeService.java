@@ -30,9 +30,11 @@ public class EmployeeService {
     public Employee patchEmployee(Long id, Employee employee){
         Employee newEmployee = getEmployeeById(id);
         newEmployee.setId(id);
-        newEmployee.setEmail(employee.getEmail());
-        newEmployee.setRole(employee.getRole());
-        newEmployee.setEnterprise(employee.getEnterprise());
+        if (employee.getEmail() != null) newEmployee.setEmail(employee.getEmail());
+        if (employee.getPhone() != null) newEmployee.setEmail(employee.getPhone());
+        if (employee.getImage() != null) newEmployee.setEmail(employee.getImage());
+        if (employee.getRole() != null) newEmployee.setRole(employee.getRole());
+        if (employee.getEnterprise() != null) newEmployee.setEnterprise(employee.getEnterprise());
 
         return this.repository.save(newEmployee);
     }

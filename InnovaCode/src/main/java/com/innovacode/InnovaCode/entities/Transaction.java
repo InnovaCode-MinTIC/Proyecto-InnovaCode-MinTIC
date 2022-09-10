@@ -4,7 +4,9 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.util.Date;
 @Entity
 @Table(name ="transaction")
@@ -22,10 +24,10 @@ public class Transaction {
     private float amount;
 
     @ManyToOne
-    private Profile user;
+    private Enterprise enterprise;
 
     @ManyToOne
-    private Enterprise enterprise;
+    private Employee employee;
 
     @Column(name ="createdAt")
     private Date createdAt;
@@ -35,14 +37,13 @@ public class Transaction {
     public Transaction() {
     }
 
-    public Transaction(long id, String concept, float amount, Profile user, Enterprise enterprise, Date createdAt, Date updatedAt) {
+    public Transaction(long id, String concept, float amount, Enterprise enterprise, Employee employee) {
         this.id = id;
         this.concept = concept;
         this.amount = amount;
-        this.user = user;
         this.enterprise = enterprise;
-        this.createdAt = createdAt;
-        this.updatedAt = updatedAt;
+        this.employee = employee;
+        setCreatedAt();
     }
 
     public long getId() {
@@ -58,6 +59,7 @@ public class Transaction {
     }
 
     public void setConcept(String concept) {
+        setUpdatedAt();
         this.concept = concept;
     }
 
@@ -66,15 +68,8 @@ public class Transaction {
     }
 
     public void setAmount(float amount) {
+        setUpdatedAt();
         this.amount = amount;
-    }
-
-    public Profile getUser() {
-        return user;
-    }
-
-    public void setUser(Profile user) {
-        this.user = user;
     }
 
     public Enterprise getEnterprise() {
@@ -82,35 +77,35 @@ public class Transaction {
     }
 
     public void setEnterprise(Enterprise enterprise) {
+        setUpdatedAt();
         this.enterprise = enterprise;
+    }
+
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        setUpdatedAt();
+        this.employee = employee;
     }
 
     public Date getCreatedAt() {
         return createdAt;
     }
 
-    public void setCreatedAt(Date createdAt) {
-        this.createdAt = createdAt;
-    }
-
     public Date getUpdatedAt() {
         return updatedAt;
     }
 
-    public void setUpdatedAt(Date updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
-    private void setCreatedAt() {
-        ZoneId defaultZoneId = ZoneId.systemDefault();
-        LocalDate localDate = LocalDate.now();
-        this.createdAt = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
+    public void setCreatedAt() {
+        LocalDateTime localDate = LocalDateTime.now(ZoneOffset.UTC);
+        this.createdAt = Date.from(localDate.toInstant(ZoneOffset.of("-05:00")));
     }
 
     public void setUpdatedAt() {
-        ZoneId defaultZoneId = ZoneId.systemDefault();
-        LocalDate localDate = LocalDate.now();
-        this.updatedAt = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
+        LocalDateTime localDate = LocalDateTime.now(ZoneOffset.UTC);
+        this.updatedAt = Date.from(localDate.toInstant(ZoneOffset.of("-05:00")));
     }
 
     @Override
@@ -119,7 +114,6 @@ public class Transaction {
                 "id=" + id +
                 ", concept='" + concept + '\'' +
                 ", amount=" + amount +
-                ", user=" + user +
                 ", enterprise=" + enterprise +
                 ", createdAt=" + createdAt +
                 ", updatedAt=" + updatedAt +
