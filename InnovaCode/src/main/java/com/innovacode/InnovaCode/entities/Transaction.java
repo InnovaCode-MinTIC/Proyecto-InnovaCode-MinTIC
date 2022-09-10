@@ -43,7 +43,8 @@ public class Transaction {
         this.amount = amount;
         this.enterprise = enterprise;
         this.employee = employee;
-        setCreatedAt();
+        LocalDateTime localDate = LocalDateTime.now(ZoneOffset.UTC);
+        this.createdAt = Date.from(localDate.toInstant(ZoneOffset.UTC));
     }
 
     public long getId() {
@@ -96,11 +97,6 @@ public class Transaction {
 
     public Date getUpdatedAt() {
         return updatedAt;
-    }
-
-    public void setCreatedAt() {
-        LocalDateTime localDate = LocalDateTime.now(ZoneOffset.UTC);
-        this.createdAt = Date.from(localDate.toInstant(ZoneOffset.of("-05:00")));
     }
 
     public void setUpdatedAt() {

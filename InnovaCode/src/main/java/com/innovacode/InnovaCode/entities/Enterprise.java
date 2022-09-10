@@ -48,7 +48,9 @@ public class Enterprise {
         this.address = address;
         this.users = users;
         this.transactions = transactions;
-        setCreatedAt();
+        LocalDateTime localDateCreated = LocalDateTime.now();
+        this.createdAt = Date.from(localDateCreated.toInstant(ZoneOffset.UTC));
+        this.updatedAt = null;
     }
 
     public long getId() {
@@ -73,7 +75,7 @@ public class Enterprise {
     }
 
     public void setDocument(String document) {
-        setUpdatedAt();
+        //setUpdatedAt();
         this.document = document;
     }
 
@@ -82,7 +84,7 @@ public class Enterprise {
     }
 
     public void setPhone(String phone) {
-        setUpdatedAt();
+        //setUpdatedAt();
         this.phone = phone;
     }
 
@@ -91,7 +93,7 @@ public class Enterprise {
     }
 
     public void setAddress(String address) {
-        setUpdatedAt();
+        //setUpdatedAt();
         this.address = address;
     }
 
@@ -100,7 +102,7 @@ public class Enterprise {
     }
 
     public void setUsers(List<Employee> users) {
-        setUpdatedAt();
+        //setUpdatedAt();
         this.users = users;
     }
 
@@ -109,7 +111,7 @@ public class Enterprise {
     }
 
     public void setTransactions(List<Transaction> transactions) {
-        setUpdatedAt();
+        //setUpdatedAt();
         this.transactions = transactions;
     }
 
@@ -121,14 +123,14 @@ public class Enterprise {
         return updatedAt;
     }
 
-    public void setCreatedAt() {
-        LocalDateTime localDateCreate = LocalDateTime.now();
-        this.createdAt = Date.from(localDateCreate.toInstant(ZoneOffset.UTC));
-    }
-
     public void setUpdatedAt() {
         LocalDateTime localDate = LocalDateTime.now();
         this.updatedAt = Date.from(localDate.toInstant(ZoneOffset.UTC));
+    }
+
+    public void setCreatedAt() {
+        LocalDateTime localDateCreated = LocalDateTime.now();
+        this.createdAt = Date.from(localDateCreated.toInstant(ZoneOffset.UTC));
     }
 
     @Override
@@ -141,7 +143,7 @@ public class Enterprise {
                 ", address='" + address + '\'' +
                 ", users=" + users +
                 ", transactions=" + transactions +
-                ", createdAt=" + createdAt +
+                ", createdAtTime=" + createdAt +
                 ", updatedAt=" + updatedAt +
                 '}';
     }

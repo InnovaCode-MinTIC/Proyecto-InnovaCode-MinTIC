@@ -30,10 +30,10 @@ public class EnterpriseService {
     public Enterprise patchEnterprise(Long id, Enterprise enterprise) {
         Enterprise newEnterprise = getEnterpriseById(id);
         newEnterprise.setId(id);
-        newEnterprise.setName(enterprise.getName());
-        newEnterprise.setDocument(enterprise.getDocument());
-        newEnterprise.setPhone(enterprise.getPhone());
-        newEnterprise.setAddress(enterprise.getAddress());
+        if(enterprise.getName() != null) newEnterprise.setName(enterprise.getName());
+        if(enterprise.getDocument() != null) newEnterprise.setDocument(enterprise.getDocument());
+        if(enterprise.getPhone() != null) newEnterprise.setPhone(enterprise.getPhone());
+        if(enterprise.getName() != null) newEnterprise.setAddress(enterprise.getAddress());
 
         return this.repository.save(newEnterprise);
     }
