@@ -124,14 +124,10 @@ public class Enterprise {
     }
 
     public void setUpdatedAt() {
-        LocalDateTime localDate = LocalDateTime.now();
+        LocalDateTime localDate = LocalDateTime.now(ZoneOffset.UTC);
         this.updatedAt = Date.from(localDate.toInstant(ZoneOffset.UTC));
     }
 
-    public void setCreatedAt() {
-        LocalDateTime localDateCreated = LocalDateTime.now();
-        this.createdAt = Date.from(localDateCreated.toInstant(ZoneOffset.UTC));
-    }
 
     @Override
     public String toString() {

@@ -101,7 +101,7 @@ public class Transaction {
 
     public void setUpdatedAt() {
         LocalDateTime localDate = LocalDateTime.now(ZoneOffset.UTC);
-        this.updatedAt = Date.from(localDate.toInstant(ZoneOffset.of("-05:00")));
+        this.updatedAt = Date.from(localDate.toInstant(ZoneOffset.UTC));
     }
     @Override
     public String toString() {

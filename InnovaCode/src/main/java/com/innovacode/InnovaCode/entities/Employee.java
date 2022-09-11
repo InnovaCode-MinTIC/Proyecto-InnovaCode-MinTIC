@@ -51,6 +51,7 @@ public class Employee {
         this.enterprise = enterprise;
         this.transactions = transactions;
         this.createdAt = createdAt;
+        this.updatedAt = null;
     }
 
     public long getId() {
