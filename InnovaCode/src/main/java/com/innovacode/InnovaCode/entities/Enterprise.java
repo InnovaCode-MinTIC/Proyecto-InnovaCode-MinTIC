@@ -9,6 +9,8 @@ import java.util.List;
 @Entity
 @Table(name = "enterprise")
 public class Enterprise {
+    LocalDateTime localDate = LocalDateTime.now(ZoneOffset.UTC);
+
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
@@ -25,14 +27,14 @@ public class Enterprise {
     @Column(name = "address")
     private String address;
 
-    @OneToMany
+    @OneToMany(mappedBy = "enterprise")
     private List<Employee> users;
 
-    @OneToMany
+    @OneToMany//(fetch = FetchType.LAZY, mappedBy = "employee")
     private List<Transaction> transactions;
 
     @Column(name = "createdAt")
-    private Date createdAt;
+    private Date createdAt = Date.from(localDate.toInstant(ZoneOffset.UTC));
 
     @Column(name = "updatedAt")
     private Date updatedAt;
@@ -48,9 +50,7 @@ public class Enterprise {
         this.address = address;
         this.users = users;
         this.transactions = transactions;
-        LocalDateTime localDateCreated = LocalDateTime.now();
-        this.createdAt = Date.from(localDateCreated.toInstant(ZoneOffset.UTC));
-        this.updatedAt = null;
+        this.createdAt = createdAt;
     }
 
     public long getId() {

@@ -11,6 +11,7 @@ import java.util.List;
 @Entity
 @Table(name = "employee")
 public class Employee {
+    LocalDateTime localDate = LocalDateTime.now(ZoneOffset.UTC);
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -24,23 +25,24 @@ public class Employee {
     private Enum_RoleName role;
 
     @ManyToOne
+    @JoinTable(name="enterprise_id")
     private Enterprise enterprise;
 
-    @OneToMany
+    @OneToMany//(fetch = FetchType.LAZY, mappedBy = "employee")
     private List<Transaction> transactions;
     @Column(name = "image")
     private String image;
     @Column(name = "phone")
     private String phone;
     @Column(name = "createdAt")
-    private Date createdAt;
+    private Date createdAt = Date.from(localDate.toInstant(ZoneOffset.UTC));
     @Column(name = "updatedAt")
     private Date updatedAt;
 
     public Employee() {
     }
 
-    public Employee(long id, String email, Enum_RoleName role, String image, String phone, Enterprise enterprise, List<Transaction> transactions, Date createdAt, Date updatedAt) {
+    public Employee(long id, String email, Enum_RoleName role, String image, String phone, Enterprise enterprise, List<Transaction> transactions) {
         this.id = id;
         this.email = email;
         this.image = image;
@@ -48,8 +50,7 @@ public class Employee {
         this.role = role;
         this.enterprise = enterprise;
         this.transactions = transactions;
-        LocalDateTime localDateCreated = LocalDateTime.now(ZoneOffset.UTC);
-        this.createdAt = Date.from(localDateCreated.toInstant(ZoneOffset.UTC));
+        this.createdAt = createdAt;
     }
 
     public long getId() {
@@ -74,7 +75,7 @@ public class Employee {
     }
 
     public void setImage(String image) {
-        setUpdatedAt();
+        //setUpdatedAt();
         this.image = image;
     }
 
@@ -83,7 +84,7 @@ public class Employee {
     }
 
     public void setPhone(String phone) {
-        setUpdatedAt();
+        //setUpdatedAt();
         this.phone = phone;
     }
 
@@ -92,6 +93,7 @@ public class Employee {
     }
 
     public void setRole(Enum_RoleName role) {
+        //setUpdatedAt();
         this.role = role;
     }
 
@@ -100,7 +102,7 @@ public class Employee {
     }
 
     public void setEnterprise(Enterprise enterprise) {
-        setUpdatedAt();
+        //setUpdatedAt();
         this.enterprise = enterprise;
     }
 
@@ -109,7 +111,7 @@ public class Employee {
     }
 
     public void setTransactions(List<Transaction> transactions) {
-        setUpdatedAt();
+        //setUpdatedAt();
         this.transactions = transactions;
     }
 
@@ -123,7 +125,7 @@ public class Employee {
 
     public void setUpdatedAt() {
         LocalDateTime localDate = LocalDateTime.now(ZoneOffset.UTC);
-        this.updatedAt = Date.from(localDate.toInstant(ZoneOffset.of("-05:00")));
+        this.updatedAt = Date.from(localDate.toInstant(ZoneOffset.UTC));
     }
 
     @Override

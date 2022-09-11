@@ -3,17 +3,17 @@ package com.innovacode.InnovaCode.entities;
 import org.springframework.web.bind.annotation.ModelAttribute;
 
 import javax.persistence.*;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.util.Date;
 @Entity
 @Table(name ="transaction")
 public class Transaction {
 
+    LocalDateTime localDate = LocalDateTime.now(ZoneOffset.UTC);
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id", nullable = false)
     private long id;
 
@@ -23,14 +23,15 @@ public class Transaction {
     @Column(name = "amount")
     private float amount;
 
-    @ManyToOne
+    @ManyToOne//(name = "enterprise_id", insertable = false, updatable = true)
     private Enterprise enterprise;
 
-    @ManyToOne
+    @ManyToOne//(fetch = FetchType.LAZY)
+    //@JoinColumn(name = "employee_id", insertable = false, updatable = true)
     private Employee employee;
 
     @Column(name ="createdAt")
-    private Date createdAt;
+    private Date createdAt = Date.from(localDate.toInstant(ZoneOffset.UTC));;
     @Column(name="updatedAt")
     private Date updatedAt;
 
@@ -43,8 +44,7 @@ public class Transaction {
         this.amount = amount;
         this.enterprise = enterprise;
         this.employee = employee;
-        LocalDateTime localDate = LocalDateTime.now(ZoneOffset.UTC);
-        this.createdAt = Date.from(localDate.toInstant(ZoneOffset.UTC));
+        this.createdAt = createdAt;
     }
 
     public long getId() {
@@ -87,7 +87,7 @@ public class Transaction {
     }
 
     public void setEmployee(Employee employee) {
-        setUpdatedAt();
+        //setUpdatedAt();
         this.employee = employee;
     }
 
@@ -103,7 +103,6 @@ public class Transaction {
         LocalDateTime localDate = LocalDateTime.now(ZoneOffset.UTC);
         this.updatedAt = Date.from(localDate.toInstant(ZoneOffset.of("-05:00")));
     }
-
     @Override
     public String toString() {
         return "Transaction{" +
