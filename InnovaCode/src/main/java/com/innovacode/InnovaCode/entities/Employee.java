@@ -25,10 +25,9 @@ public class Employee {
     private Enum_RoleName role;
 
     @ManyToOne
-    @JoinTable(name="enterprise_id")
     private Enterprise enterprise;
 
-    @OneToMany//(fetch = FetchType.LAZY, mappedBy = "employee")
+    @OneToMany
     private List<Transaction> transactions;
     @Column(name = "image")
     private String image;

@@ -31,8 +31,8 @@ public class EmployeeService {
         Employee newEmployee = getEmployeeById(id);
         newEmployee.setId(id);
         if (employee.getEmail() != null) newEmployee.setEmail(employee.getEmail());
-        if (employee.getPhone() != null) newEmployee.setEmail(employee.getPhone());
-        if (employee.getImage() != null) newEmployee.setEmail(employee.getImage());
+        if (employee.getPhone() != null) newEmployee.setPhone(employee.getPhone());
+        if (employee.getImage() != null) newEmployee.setImage(employee.getImage());
         if (employee.getRole() != null) newEmployee.setRole(employee.getRole());
         if (employee.getEnterprise() != null) newEmployee.setEnterprise(employee.getEnterprise());
 

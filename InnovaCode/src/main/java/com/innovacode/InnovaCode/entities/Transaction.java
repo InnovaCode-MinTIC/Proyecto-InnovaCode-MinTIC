@@ -23,10 +23,10 @@ public class Transaction {
     @Column(name = "amount")
     private float amount;
 
-    @ManyToOne//(name = "enterprise_id", insertable = false, updatable = true)
+    @ManyToOne
     private Enterprise enterprise;
 
-    @ManyToOne//(fetch = FetchType.LAZY)
+    @ManyToOne
     //@JoinColumn(name = "employee_id", insertable = false, updatable = true)
     private Employee employee;
 

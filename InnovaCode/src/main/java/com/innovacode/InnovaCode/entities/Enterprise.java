@@ -27,10 +27,10 @@ public class Enterprise {
     @Column(name = "address")
     private String address;
 
-    @OneToMany(mappedBy = "enterprise")
+    @OneToMany
     private List<Employee> users;
 
-    @OneToMany//(fetch = FetchType.LAZY, mappedBy = "employee")
+    @OneToMany
     private List<Transaction> transactions;
 
     @Column(name = "createdAt")
