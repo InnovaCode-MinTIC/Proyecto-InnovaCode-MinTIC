@@ -1,91 +1,117 @@
 package com.innovacode.InnovaCode.entities;
 
-import java.time.LocalDate;
-import java.time.ZoneId;
-import java.util.Date;
+import org.springframework.web.bind.annotation.ModelAttribute;
 
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.Date;
+@Entity
+@Table(name ="transaction")
 public class Transaction {
+
+    LocalDateTime localDate = LocalDateTime.now(ZoneOffset.UTC);
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "id", nullable = false)
     private long id;
+
+    @Column(name = "concept")
     private String concept;
+
+    @Column(name = "amount")
     private float amount;
-    private Profile user;
+
+    @ManyToOne
     private Enterprise enterprise;
-    private Date createdAt;
+
+    @ManyToOne
+    //@JoinColumn(name = "employee_id", insertable = false, updatable = true)
+    private Employee employee;
+
+    @Column(name ="createdAt")
+    private Date createdAt = Date.from(localDate.toInstant(ZoneOffset.UTC));;
+    @Column(name="updatedAt")
     private Date updatedAt;
 
-    public Transaction(long id, String concept, float amount, Profile user, Enterprise enterprise) {
+    public Transaction() {
+    }
+
+    public Transaction(long id, String concept, float amount, Enterprise enterprise, Employee employee) {
         this.id = id;
         this.concept = concept;
         this.amount = amount;
-        this.user = user;
         this.enterprise = enterprise;
-        setCreatedAt();
+        this.employee = employee;
+        this.createdAt = createdAt;
     }
 
     public long getId() {
         return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String getConcept() {
         return concept;
+    }
+
+    public void setConcept(String concept) {
+        setUpdatedAt();
+        this.concept = concept;
     }
 
     public float getAmount() {
         return amount;
     }
 
-    public Profile getUser() {
-        return user;
+    public void setAmount(float amount) {
+        setUpdatedAt();
+        this.amount = amount;
     }
 
     public Enterprise getEnterprise() {
         return enterprise;
     }
 
-    public void setId(long id) {
-        this.id = id;
-    }
-
-    public void setConcept(String concept) {
-        this.concept = concept;
-        setUpdatedAt();
-    }
-
-    public void setAmount(float amount) {
-        this.amount = amount;
-        setUpdatedAt();
-    }
-
-    public void setUser(Profile user) {
-        this.user = user;
-    }
-
     public void setEnterprise(Enterprise enterprise) {
+        setUpdatedAt();
         this.enterprise = enterprise;
     }
 
-    private void setCreatedAt() {
-        ZoneId defaultZoneId = ZoneId.systemDefault();
-        LocalDate localDate = LocalDate.now();
-        this.createdAt = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
+    public Employee getEmployee() {
+        return employee;
+    }
+
+    public void setEmployee(Employee employee) {
+        //setUpdatedAt();
+        this.employee = employee;
+    }
+
+    public Date getCreatedAt() {
+        return createdAt;
+    }
+
+    public Date getUpdatedAt() {
+        return updatedAt;
     }
 
     public void setUpdatedAt() {
-        ZoneId defaultZoneId = ZoneId.systemDefault();
-        LocalDate localDate = LocalDate.now();
-        this.updatedAt = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
+        LocalDateTime localDate = LocalDateTime.now(ZoneOffset.UTC);
+        this.updatedAt = Date.from(localDate.toInstant(ZoneOffset.UTC));
     }
     @Override
     public String toString() {
         return "Transaction{" +
-                "\n\t id=" + id +
-                "\n\t concept='" + concept + '\'' +
-                "\n\t amount=" + amount +
-                "\n\t user=" + user.getUser() +
-                "\n\t enterprise=" + enterprise.getName() +
-                "\n\t createdAt=" + createdAt +
-                "\n\t updatedAt=" + updatedAt +
+                "id=" + id +
+                ", concept='" + concept + '\'' +
+                ", amount=" + amount +
+                ", enterprise=" + enterprise +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
                 '}';
     }
-    
 }

@@ -1,55 +1,118 @@
 package com.innovacode.InnovaCode.entities;
-import java.util.Arrays;
-import java.util.Date;
-import java.time.LocalDate;
-import java.time.ZoneId;
 
+import com.innovacode.InnovaCode.enums.Enum_RoleName;
+
+import javax.persistence.*;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.Date;
+import java.util.List;
+
+@Entity
+@Table(name = "employee")
 public class Employee {
-    
-    public enum Enum_RoleName {
-        Admin, Operario;
-    }
-    
+    LocalDateTime localDate = LocalDateTime.now(ZoneOffset.UTC);
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
+
+    @Column(name = "email",unique = true)
     private String email;
-    private Profile profile;
+
+    @Enumerated(EnumType.STRING)
+    @Column(name = "role")
     private Enum_RoleName role;
+
+    @ManyToOne
     private Enterprise enterprise;
-    private Transaction [] transactions;
-    private Date createdAt;
+
+    @OneToMany
+    private List<Transaction> transactions;
+    @Column(name = "image")
+    private String image;
+    @Column(name = "phone")
+    private String phone;
+    @Column(name = "createdAt")
+    private Date createdAt = Date.from(localDate.toInstant(ZoneOffset.UTC));
+    @Column(name = "updatedAt")
     private Date updatedAt;
 
-    public Employee(long id, String email, Profile profile, Enum_RoleName role, Enterprise enterprise) {
+    public Employee() {
+    }
+
+    public Employee(long id, String email, Enum_RoleName role, String image, String phone, Enterprise enterprise, List<Transaction> transactions) {
         this.id = id;
         this.email = email;
-        this.profile = profile;
+        this.image = image;
+        this.phone = phone;
         this.role = role;
         this.enterprise = enterprise;
-        setCreatedAt();
+        this.transactions = transactions;
+        this.createdAt = createdAt;
+        this.updatedAt = null;
     }
 
     public long getId() {
         return id;
     }
 
+    public void setId(long id) {
+        this.id = id;
+    }
+
     public String getEmail() {
         return email;
     }
 
-    public Profile getProfile() {
-        return profile;
+    public void setEmail(String email) {
+        setUpdatedAt();
+        this.email = email;
+    }
+
+    public String getImage() {
+        return image;
+    }
+
+    public void setImage(String image) {
+        //setUpdatedAt();
+        this.image = image;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        //setUpdatedAt();
+        this.phone = phone;
     }
 
     public Enum_RoleName getRole() {
         return role;
     }
 
+    public void setRole(Enum_RoleName role) {
+        //setUpdatedAt();
+        this.role = role;
+    }
+
     public Enterprise getEnterprise() {
         return enterprise;
     }
 
-    public Transaction[] getTransactions() {
+    public void setEnterprise(Enterprise enterprise) {
+        //setUpdatedAt();
+        this.enterprise = enterprise;
+    }
+
+    public List<Transaction> getTransactions() {
         return transactions;
+    }
+
+    public void setTransactions(List<Transaction> transactions) {
+        //setUpdatedAt();
+        this.transactions = transactions;
     }
 
     public Date getCreatedAt() {
@@ -60,58 +123,21 @@ public class Employee {
         return updatedAt;
     }
 
-    public void setId(long id) {
-        this.id = id;
-        profile.setId(id+"");
-    }
-
-    public void setEmail(String email) {
-        this.email = email;
-        setUpdatedAt();
-    }
-
-    public void setProfile(Profile profile) {
-        this.profile = profile;
-        setUpdatedAt();
-    }
-
-    public void setRole(Enum_RoleName role) {
-        this.role = role;
-        setUpdatedAt();
-    }
-
-    public void setEnterprise(Enterprise enterprise) {
-        this.enterprise = enterprise;
-        setUpdatedAt();
-    }
-
-    public void setTransactions(Transaction[] transactions) {
-        this.transactions = transactions;
-    }
-
-    private void setCreatedAt() {
-        ZoneId defaultZoneId = ZoneId.systemDefault();
-        LocalDate localDate = LocalDate.now();
-        this.createdAt = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
-    }
-
     public void setUpdatedAt() {
-        ZoneId defaultZoneId = ZoneId.systemDefault();
-        LocalDate localDate = LocalDate.now();
-        this.updatedAt = Date.from(localDate.atStartOfDay(defaultZoneId).toInstant());
+        LocalDateTime localDate = LocalDateTime.now(ZoneOffset.UTC);
+        this.updatedAt = Date.from(localDate.toInstant(ZoneOffset.UTC));
     }
 
     @Override
     public String toString() {
-        return "\n Employee{" +
-                "\n id=" + id +
-                "\n email='" + email + '\'' +
-                "\n profile=" + profile +
-                "\n role=" + role +
-                "\n enterprise=" + enterprise +
-                "\n transactions=" + Arrays.toString(transactions) +
-                "\n createdAt=" + createdAt +
-                "\n updatedAt=" + updatedAt +
-                '}'+"\n";
+        return "Employee{" +
+                "id=" + id +
+                ", email='" + email + '\'' +
+                ", role=" + role +
+                ", enterprise=" + enterprise +
+                ", transactions=" + transactions +
+                ", createdAt=" + createdAt +
+                ", updatedAt=" + updatedAt +
+                '}';
     }
 }
