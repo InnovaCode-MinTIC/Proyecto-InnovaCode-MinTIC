@@ -17,22 +17,17 @@ public class EmployeeController {
     public List<Employee> getEmployeeList(){
         return this.service.getEmployeeList();
     }
-
     @PostMapping("/users")
     public Employee postEmployee(@RequestBody Employee employee){
         return this.service.postEmployee(employee);
     }
-
     @GetMapping("/users/{id}")
     public Employee getEmployeeById(@PathVariable Long id){
         return this.service.getEmployeeById(id);
     }
-
     @PatchMapping("/users/{id}")
     public Employee patchEmployee(@PathVariable Long id,@RequestBody Employee employee){
-        return this.service.patchEmployee(id,employee);
-    }
-
+        return this.service.patchEmployee(id,employee);    }
     @DeleteMapping("/users/{id}")
     public void deleteEmployee(@PathVariable Long id){
         this.service.deleteEmployee(id);

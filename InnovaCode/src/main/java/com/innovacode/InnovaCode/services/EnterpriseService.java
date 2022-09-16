@@ -2,6 +2,7 @@ package com.innovacode.InnovaCode.services;
 
 import com.innovacode.InnovaCode.entities.Enterprise;
 import com.innovacode.InnovaCode.repositories.EnterpriseRepository;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,6 +10,8 @@ import java.util.List;
 @Service
 public class EnterpriseService {
 
+
+    @Autowired
     private EnterpriseRepository repository;
 
     public EnterpriseService(EnterpriseRepository repository) {
@@ -16,7 +19,7 @@ public class EnterpriseService {
     }
 
     public List<Enterprise> getEnterpriseList() {
-        return this.repository.findAll();
+        return repository.findAll();
     }
 
     public Enterprise postEnterprise(Enterprise enterprise) {
