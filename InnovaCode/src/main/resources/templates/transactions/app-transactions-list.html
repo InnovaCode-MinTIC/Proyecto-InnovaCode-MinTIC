@@ -149,6 +149,8 @@
                         <th>Id</th>
                         <th>Concepto</th>
                         <th>Monto</th>
+                        <!-- <th>Empresa</th>
+                        <th>Empleado</th> -->
                         <th>CreatedAt</th>
                         <th>UpdatedAt</th>
                         <th>Acciones</th>
@@ -162,12 +164,14 @@
                         <td th:text="${transaction.id}">Id</td>
                         <td th:text="${transaction.concept}">Concepto</td>
                         <td th:text="${transaction.amount}">Monto</td>
+                        <!-- <td th:text="${transaction.enterprise.name}">Empresa</td>
+                        <td th:text="${transaction.employee.email}">email</td> -->
                         <td th:text="${transaction.createdAt}">CreatedAt</td>
                         <td th:text="${transaction.updatedAt}">updatedAt</td>
                         <td>
                 
                             <a th:href="@{/movements/edit/{id}(id=${transaction.id})}" class="btn btn-info"><i data-feather="edit-3"></i></a>
-                            <a th:href="@{/movements/{id}(id=${transaction.id})}" class="btn btn-danger"><i data-feather="trash-2"></i></a>
+                            <a th:href="@{/movements/delete/{id}(id=${transaction.id})}" class="btn btn-danger"><i data-feather="trash-2"></i></a>
                 
                         </td>
                     </tr>

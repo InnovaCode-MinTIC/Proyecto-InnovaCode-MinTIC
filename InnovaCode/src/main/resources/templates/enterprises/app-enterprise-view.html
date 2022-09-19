@@ -9,7 +9,7 @@
     <meta name="description" content="Trabajo Mintic">
     <meta name="keywords" content="Mintic">
     <meta name="author" content="Innovacodes">
-    <title>User Information</title>
+    <title>Enterprise Information</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" th:href="@{/app-assets/images/ico/apple-icon-120.png}" rel="stylesheet">
 
     <!-- BEGIN: Vendor CSS-->
@@ -115,14 +115,14 @@
 
             <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="user">Usuarios</span></a>
                 <ul class="menu-content">
-                    <li class = "active"><a class="d-flex align-items-center" th:href="@{/users}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Lista</span></a> </li>
+                    <li><a class="d-flex align-items-center" th:href="@{/users}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Lista</span></a> </li>
                     <li><a class="d-flex align-items-center" th:href="@{/users/create}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Add">Añadir</span></a> </li>
                 </ul>
             </li>
 
             <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="briefcase"></i><span class="menu-title text-truncate" data-i18n="enterprise">Empresa</span></a>
                 <ul class="menu-content">
-                    <li><a class="d-flex align-items-center" th:href="@{/enterprises}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">List</span></a> </li>
+                    <li class = "active"><a class="d-flex align-items-center" th:href="@{/enterprises}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">List</span></a> </li>
                     <li><a class="d-flex align-items-center" th:href="@{/enterprises/create}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Add">Añadir</span></a> </li>
                 </ul>
             </li>
@@ -140,7 +140,7 @@
             </div>
             <div class="content-body">
                 <section class="app-user-view">
-                    <!-- User Card & Plan Starts -->
+                    <!-- Enterprise Card & Plan Starts -->
                     <div class="row">
                         <!-- User Card starts-->
                         <div class="col-xl-12 col-lg-12 col-md-12" >
@@ -150,15 +150,15 @@
                                         <div class="col-xl-6 col-lg-12 d-flex flex-column justify-content-between border-container-lg">
                                             <div class="user-avatar-section">
                                                 <div class="d-flex justify-content-start">
-                                                    <img class="img-fluid rounded" src="../app-assets/images/avatars/7.png" height="104" width="104" alt="User avatar" />
+                                                    <img class="img-fluid rounded" src="../app-assets/images/avatars/placeholder.jpg" height="104" width="104" alt="User avatar" />
                                                     <div class="d-flex flex-column ms-1">
                                                         <div class="user-info mb-1">
-                                                            <h4 class="mb-0" th:text="${employee.id}" >ID</h4>
-                                                            <span class="card-text" th:text="${employee.email}">Email</span>
+                                                            <h4 class="mb-0" th:text="${enterprise.id}" >ID</h4>
+                                                            <span class="card-text" th:text="${enterprise.name}">Name</span>
                                                         </div>
                                                         <div class="d-flex flex-wrap">
-                                                            <a th:href="@{/users/edit/{id}(id=${employee.id})}" class="btn btn-primary">Editar</a>
-                                                            <a th:href="@{/users/delete/{id}(id=${employee.id})}" class="btn btn-outline-danger ms-1">Eliminar</a>
+                                                            <a th:href="@{/enterprises/edit/{id}(id=${enterprise.id})}" class="btn btn-primary">Editar</a>
+                                                            <a th:href="@{/enterprises/delete/{id}(id=${enterprise.id})}" class="btn btn-outline-danger ms-1">Eliminar</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -176,23 +176,23 @@
                                                 <div class="d-flex flex-wrap my-50">
                                                     <div class="user-info-title">
                                                         <i data-feather="star" class="me-1"></i>
-                                                        <span class="card-text user-info-title fw-bold mb-0">Role</span>
+                                                        <span class="card-text user-info-title fw-bold mb-0">Documento</span>
                                                     </div>
-                                                    <p class="card-text mb-0" th:text="${employee.role}" >role</p>
+                                                    <p class="card-text mb-0" th:text="${enterprise.document}" >document</p>
                                                 </div>
                                                 <div class="d-flex flex-wrap my-50">
                                                     <div class="user-info-title">
                                                         <i data-feather="phone" class="me-1"></i>
                                                         <span class="card-text user-info-title fw-bold mb-0">Contacto</span>
                                                     </div>
-                                                    <p class="card-text mb-0" th:text="${employee.phone}" >phone</p>
+                                                    <p class="card-text mb-0" th:text="${enterprise.phone}" >phone</p>
                                                 </div>
                                                 <div class="d-flex flex-wrap my-50">
                                                     <div class="user-info-title">
-                                                        <i data-feather="briefcase" class="me-1"></i>
-                                                        <span class="card-text user-info-title fw-bold mb-0">Empresa</span>
+                                                        <i data-feather="truck" class="me-1"></i>
+                                                        <span class="card-text user-info-title fw-bold mb-0">Dirección</span>
                                                     </div>
-                                                    <p class="card-text mb-0" th:text="${employee.enterprise.name}" >enterprise</p>
+                                                    <p class="card-text mb-0" th:text="${enterprise.address}" >enterprise</p>
                                                 </div>
                                             </div>
                                         </div>
@@ -231,6 +231,42 @@
                             <a th:href="@{/movements/edit/{id}(id=${transaction.id})}" class="btn btn-info"><i data-feather="edit-3"></i></a>
                             <a th:href="@{/movements/{id}(id=${transaction.id})}" class="btn btn-danger"><i data-feather="trash-2"></i></a>
                 
+                        </td>
+                    </tr>
+                    </tbody>
+                </table>
+                
+                <!-- Table of Employees -->
+                <table class="table table-striped table-bordered">
+                    <thead class="table-dark">
+                    <tr>
+                        <th>Id</th>
+                        <th>email</th>
+                        <th>Rol</th>
+                        <th>Empresa</th>
+                        <th>Imagen</th>
+                        <th>Teléfono</th>
+                        <th>CreatedAt</th>
+                        <th>UpdatedAt</th>
+                        <th>Acciones</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:if="${employees.empty}">
+                            <td colspan="4">No hay empleados</td>
+                        </tr>
+                    <tr th:each="employee : ${employees}">
+                        <td th:text="${employee.id}">Id</td>
+                        <td><a th:href="@{/users/{id}(id=${employee.id})}" th:text="${employee.email}">email</a></td>
+                        <td th:text="${employee.role}">Rol</td>
+                        <td th:text="${employee.enterprise.name}">Empresa</td>
+                        <td th:text="${employee.image}">Imagen</td>
+                        <td th:text="${employee.phone}">Teléfono</td>
+                        <td th:text="${employee.createdAt}">CreatedAt</td>
+                        <td th:text="${employee.updatedAt}">updatedAt</td>
+                        <td>
+                            <a th:href="@{/users/edit/{id}(id=${employee.id})}" class="btn btn-info"><i data-feather="edit-3"></i></a>
+                            <a th:href="@{/users/delete/{id}(id=${employee.id})}" class="btn btn-danger"><i data-feather="trash-2"></i></a>
                         </td>
                     </tr>
                     </tbody>

@@ -9,7 +9,7 @@
         <meta name="description" content="Trabajo Mintic">
         <meta name="keywords" content="Mintic">
         <meta name="author" content="Innovacodes">
-        <title>Create User</title>
+        <title>Edit Transaction Information</title>
         <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,300;0,400;0,500;0,600;1,400;1,500;1,600" th:href="@{/app-assets/images/ico/apple-icon-120.png}" rel="stylesheet">
 
         <!-- BEGIN: Vendor CSS-->
@@ -17,7 +17,7 @@
         <!-- END: Vendor CSS-->
 
         <!-- BEGIN: Theme CSS-->
-        <!-- <link rel="stylesheet" type="text/css" href="../app-assets/css/core/menu/menu-types/vertical-menu.css" th:href="@{/app-assets/css/core/menu/menu-types/vertical-menu.css"> -->
+        <!-- BEGIN: Theme CSS<link rel="stylesheet" type="text/css" href="../app-assets/css/core/menu/menu-types/vertical-menu.css" th:href="@{/app-assets/css/core/menu/menu-types/vertical-menu.css"> -->
         <link rel="stylesheet" type="text/css" href="../../app-assets/css/bootstrap.css" th:href="@{/app-assets/css/bootstrap.css}">
         <link rel="stylesheet" type="text/css" href="../../app-assets/css/bootstrap-extended.css" th:href="@{/app-assets/css/bootstrap-extended.css}">
         <link rel="stylesheet" type="text/css" href="../../app-assets/css/colors.css" th:href="@{/app-assets/css/colors.css}">
@@ -108,7 +108,7 @@
                 
                 <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="file-text"></i><span class="menu-title text-truncate" data-i18n="Transactions">Transacciones</span></a>
                     <ul class="menu-content">
-                        <li><a class="d-flex align-items-center" th:href="@{/movements}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Lista</span></a> </li>
+                        <li class = "active"><a class="d-flex align-items-center" th:href="@{/movements}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Lista</span></a> </li>
                         <li><a class="d-flex align-items-center" th:href="@{/movements/create}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Add">Añadir</span></a> </li>
                     </ul>
                 </li>
@@ -116,7 +116,7 @@
                 <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="user">Usuarios</span></a>
                     <ul class="menu-content">
                         <li><a class="d-flex align-items-center" th:href="@{/users}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Lista</span></a> </li>
-                        <li class = "active"><a class="d-flex align-items-center" th:href="@{/users/create}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Add">Añadir</span></a> </li>
+                        <li><a class="d-flex align-items-center" th:href="@{/users/create}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Add">Añadir</span></a> </li>
                     </ul>
                 </li>
 
@@ -143,11 +143,11 @@
                 <section class="app-user-edit">
                     <div class="card">
                         <div class="card-body">
-                            <form th:action="@{/users}" th:object="${employee}" method="POST">
+                            <form th:action="@{/movements/{id}(id=${transaction.id})}" th:object="${transaction}" method="POST">
                                 <div class="d-flex mb-2">
-                                    <img src="../../../app-assets/images/avatars/placeholder.jpg" alt="users avatar" class="user-avatar users-avatar-shadow rounded me-2 my-25 cursor-pointer" height="90" width="90" />
+                                    <img src="../../../app-assets/images/avatars/7.png" alt="users avatar" class="user-avatar users-avatar-shadow rounded me-2 my-25 cursor-pointer" height="90" width="90" />
                                     <div class="mt-50">
-                                        <h4>Por asignar</h4>
+                                        <h4 th:text="*{id}">ID</h4>
                                         <div class="col-12 d-flex mt-1 px-0">
                                             <label class="btn btn-primary me-75 mb-0" for="change-picture">
                                                 <span class="d-none d-sm-block">Change</span>
@@ -156,9 +156,9 @@
                                                     <i class="me-0" data-feather="edit"></i>
                                                 </span>
                                             </label>
-                                            <button class="btn btn-outline-secondary d-none d-sm-block" onclick="history.back()">Cancelar</button>
-                                            <button class="btn btn-outline-secondary d-block d-sm-none" onclick="history.back()">
-                                                <i class="me-0" data-feather="chevron-left"></i>
+                                            <button class="btn btn-outline-secondary d-none d-sm-block" onclick="location.href='@{/movements/delete/{id}(id=${transaction.id})}'">Remove</button>
+                                            <button class="btn btn-outline-secondary d-block d-sm-none" onclick="location.href='@{/movements/delete/{id}(id=${transaction.id})}'">
+                                                <i class="me-0" data-feather="trash-2"></i>
                                             </button>
                                         </div>
                                     </div>
@@ -166,23 +166,14 @@
                                 <div class="row">
                                     <div class="col-md-4">
                                         <div class="mb-1">
-                                            <label class="form-label" for="email">Email</label>
-                                            <input type="text" name="email" th:field="*{email}" class="form-control" placeholder="Digite el e-mail: "required>
+                                            <label class="form-label" for="concept">Concepto</label>
+                                            <input type="text" name="concept" th:field="*{concept}" class="form-control" placeholder="Digite el concepto: "required>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="mb-1">
-                                            <label class="form-label" for="phone">Teléfono</label>
-                                            <input type="text" name="phone" th:field="*{phone}" class="form-control" placeholder="Digite el teléfono: "required>
-                                        </div>
-                                    </div>
-                                    <div class="col-md-4">
-                                        <div class="mb-1">
-                                            <label class="form-label" for="role">Rol</label>
-                                            <select class="form-select" id="role" th:field="*{role}">
-                                                <option value = "Admin">Administrador</option>
-                                                <option value = "Operario">Operador</option>
-                                            </select>
+                                            <label class="form-label" for="amount">Monto</label>
+                                            <input type="number" name="amount" th:field="*{amount}" class="form-control" placeholder="Digite el monto: "required>
                                         </div>
                                     </div>
                                     <div class="col-md-4">
@@ -193,14 +184,18 @@
                                             </select>
                                         </div>
                                     </div> 
-                                    <div class="form-group">
-                                        <label>Image: </label>
-                                        <input type="text" name="image" th:field="*{image}" class="form-control" placeholder="Digite direccion de la imagen: "required>
+                                    <div class="col-md-4">
+                                        <div class="mb-1">
+                                            <label class="form-label" for="employee">Empleado</label>
+                                            <select class="form-select" id="employee" th:field="*{employee.id}">
+                                                <option th:each="dropdownlist: ${employeeList}" th:value="${dropdownlist.id}" th:text="${dropdownlist.email}" />
+                                            </select>
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="col-12 d-flex flex-sm-row flex-column mt-2">
                                     <button type="submit" class="btn btn-primary mb-1 mb-sm-0 me-0 me-sm-1 btn-success">Guardar Cambios</button>
-                                    <button class="btn btn-outline-secondary" onclick="history.back()" >Cancelar</button>
+                                    <button type="reset" class="btn btn-outline-secondary">Resetear</button>
                                 </div>
                             </form>
                         </div>

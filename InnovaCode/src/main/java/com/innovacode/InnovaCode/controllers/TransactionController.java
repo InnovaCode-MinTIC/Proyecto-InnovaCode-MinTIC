@@ -1,7 +1,10 @@
 package com.innovacode.InnovaCode.controllers;
 
 import com.innovacode.InnovaCode.entities.Employee;
+import com.innovacode.InnovaCode.entities.Enterprise;
 import com.innovacode.InnovaCode.entities.Transaction;
+import com.innovacode.InnovaCode.services.EmployeeService;
+import com.innovacode.InnovaCode.services.EnterpriseService;
 import com.innovacode.InnovaCode.services.TransactionService;
 import org.h2.engine.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +19,10 @@ import java.util.List;
 public class TransactionController {
     @Autowired
     private TransactionService service;
+    @Autowired
+    private EnterpriseService enterpriseService;
+    @Autowired
+    private EmployeeService employeeService;
 
     @GetMapping("/movements")
     public String ListMovements(Model model){
@@ -27,7 +34,12 @@ public class TransactionController {
     public String FormCreateMovement(Model model){
         Transaction transaction = new Transaction();
         model.addAttribute("transaction",this.service.postTransaction(transaction));
-        return "MovementsCreate";
+        List<Enterprise> enterpriseList = enterpriseService.getEnterpriseList();
+        model.addAttribute("enterpriseList", enterpriseList);
+        List<Employee> employeeList = employeeService.getEmployeeList();
+        model.addAttribute("employeeList", employeeList);
+        return "transactions/app-transaction-create";
+        //return "MovementsCreate";
     }
 
     @PostMapping("/movements")
@@ -39,7 +51,12 @@ public class TransactionController {
     @GetMapping("/movements/edit/{id}")
     public String FormEditUser(@PathVariable Long id, Model model){
         model.addAttribute("transaction", this.service.getTransactionById(id));
-        return "MovementsEdit";
+        List<Enterprise> enterpriseList = enterpriseService.getEnterpriseList();
+        model.addAttribute("enterpriseList", enterpriseList);
+        List<Employee> employeeList = employeeService.getEmployeeList();
+        model.addAttribute("employeeList", employeeList);
+        return "transactions/app-transaction-edit";
+        //return "MovementsEdit";
     }
 
     @PostMapping("/movements/{id}")
@@ -48,7 +65,7 @@ public class TransactionController {
         return "redirect:/movements";
     }
 
-    @GetMapping("/movements/{id}")
+    @GetMapping("/movements/delete/{id}")
     public String deleteMovement(@PathVariable Long id) {
         this.service.deleteTransaction(id);
         return "redirect:/movements";

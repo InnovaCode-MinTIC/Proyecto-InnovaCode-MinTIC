@@ -188,10 +188,9 @@
                                     <div class="col-md-4">
                                         <div class="mb-1">
                                             <label class="form-label" for="enterprise">Empresa</label>
-                                            <input type="number" name="enterprise" th:field="*{enterprise}" class="form-control" placeholder="Digite id de la empresa: "required>
-                                            <!-- <select class="form-select" id="enterprise" th:field="*{enterprise}">
-                                                <option value="1">TELEFONICA</option>
-                                            </select> -->
+                                            <select class="form-select" id="enterprise" th:field="*{enterprise.id}">
+                                                <option th:each="dropdownlist: ${enterpriseList}" th:value="${dropdownlist.id}" th:text="${dropdownlist.name}" />
+                                            </select>
                                         </div>
                                     </div> 
                                     <div class="form-group">

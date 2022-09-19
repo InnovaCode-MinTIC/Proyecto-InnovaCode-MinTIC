@@ -146,9 +146,8 @@
                     <tr>
                         <th>Id</th>
                         <th>email</th>
-                        <!-- <th>Rol</th>
+                        <th>Rol</th>
                         <th>Empresa</th>
-                        <th>Movimientos</th> -->
                         <th>Imagen</th>
                         <th>Teléfono</th>
                         <th>CreatedAt</th>
@@ -163,9 +162,8 @@
                     <tr th:each="employee : ${employees}">
                         <td th:text="${employee.id}">Id</td>
                         <td><a th:href="@{/users/{id}(id=${employee.id})}" th:text="${employee.email}">email</a></td>
-                        <!-- <td th:text="${employee.role}">Rol</td>
-                        <td th:text="${employee.enterprise}">Empresa</td>
-                        <td th:text="${employee.transactions}">Movimientos</td> -->
+                        <td th:text="${employee.role}">Rol</td>
+                        <td th:text="${employee.enterprise.name}">Empresa</td>
                         <td th:text="${employee.image}">Imagen</td>
                         <td th:text="${employee.phone}">Teléfono</td>
                         <td th:text="${employee.createdAt}">CreatedAt</td>

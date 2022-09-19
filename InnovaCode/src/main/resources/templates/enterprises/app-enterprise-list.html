@@ -161,7 +161,7 @@
                             <td colspan="4">No hay empresas</td>
                         </tr>
                     <tr th:each="enterprise : ${enterprises}">
-                        <td th:text="${enterprise.id}">Id</td>
+                        <td><a th:href="@{/enterprises/{id}(id=${enterprise.id})}" th:text="${enterprise.id}">Id</a></td>
                         <td th:text="${enterprise.name}">Nombre</td>
                         <td th:text="${enterprise.document}">NIT</td>
                         <td th:text="${enterprise.phone}">Telefono</td>

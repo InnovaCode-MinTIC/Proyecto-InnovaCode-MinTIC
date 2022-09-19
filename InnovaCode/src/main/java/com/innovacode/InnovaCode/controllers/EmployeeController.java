@@ -19,8 +19,10 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService service;
-    //private EnterpriseService enterpriseService;
-    //private TransactionService transactionService;
+    @Autowired
+    private EnterpriseService enterpriseService;
+    @Autowired
+    private TransactionService transactionService;
 
     @GetMapping("/users")
     public String ListUsers(Model model){
@@ -31,6 +33,8 @@ public class EmployeeController {
     @GetMapping("/users/create")
     public String FormCreateUser (Model model){
         Employee employee = new Employee();
+        List<Enterprise> enterpriseList = enterpriseService.getEnterpriseList();
+        model.addAttribute("enterpriseList", enterpriseList);
         model.addAttribute("employee",employee);
         return "users/app-user-create";
         //return "UsersCreate";
@@ -45,6 +49,8 @@ public class EmployeeController {
     @GetMapping("/users/edit/{id}")
     public String FormEditUser(@PathVariable Long id, Model model){
         model.addAttribute("employee", this.service.getEmployeeById(id));
+        List<Enterprise> enterpriseList = enterpriseService.getEnterpriseList();
+        model.addAttribute("enterpriseList", enterpriseList);
         return "users/app-user-edit";
         //return "UsersEdit";
     }
@@ -63,7 +69,9 @@ public class EmployeeController {
 
     @GetMapping("/users/{id}")
     public String getUser(@PathVariable Long id, Model model){
+        List<Transaction> transactionList= transactionService.getTransactionByEmployee(id);
         model.addAttribute("employee", this.service.getEmployeeById(id));
+        model.addAttribute("transactions", transactionList);
         return "users/app-user-view";
     }
 }

@@ -1,7 +1,11 @@
 package com.innovacode.InnovaCode.controllers;
 
+import com.innovacode.InnovaCode.entities.Employee;
 import com.innovacode.InnovaCode.entities.Enterprise;
+import com.innovacode.InnovaCode.entities.Transaction;
+import com.innovacode.InnovaCode.services.EmployeeService;
 import com.innovacode.InnovaCode.services.EnterpriseService;
+import com.innovacode.InnovaCode.services.TransactionService;
 import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,6 +19,10 @@ public class EnterpriseController {
 
     @Autowired
     private EnterpriseService service;
+    @Autowired
+    private EmployeeService employeeService;
+    @Autowired
+    private TransactionService transactionService;
 
     @GetMapping("/enterprises")
     public String ListarEmpresa(Model model){
@@ -26,7 +34,8 @@ public class EnterpriseController {
     public String FormCreateEnterprise(Model modelo){
         Enterprise enterprise = new Enterprise();
         modelo.addAttribute("enterprise", enterprise);
-        return "EnterprisesCreate";
+        return "enterprises/app-enterprise-create";
+        //return "EnterprisesCreate";
     }
 
     @PostMapping("/enterprises")
@@ -36,9 +45,10 @@ public class EnterpriseController {
     }
 
     @GetMapping("/enterprises/edit/{id}")
-    public String mostrarFormularioEditar(@PathVariable Long id, Model modelo) {
-        modelo.addAttribute("enterprise", service.getEnterpriseById(id));
-        return "enterprisesEdit";
+    public String mostrarFormularioEditar(@PathVariable Long id, Model model) {
+        model.addAttribute("enterprise", service.getEnterpriseById(id));
+        return "enterprises/app-enterprise-edit";
+        //return "enterprisesEdit";
     }
 
     @PostMapping("/enterprises/{id}")
@@ -51,6 +61,16 @@ public class EnterpriseController {
     public String deleteEnterprise(@PathVariable Long id) {
         service.deleteEnterprise(id);
         return  "redirect:/enterprises";
+    }
+
+    @GetMapping("/enterprises/{id}")
+    public String getEnterprise(@PathVariable Long id, Model model){
+        List<Transaction> transactionList= transactionService.getTransactionByEnterprise(id);
+        List<Employee> employeeList= employeeService.getEmployeeByEnterprise(id);
+        model.addAttribute("enterprise", this.service.getEnterpriseById(id));
+        model.addAttribute("transactions", transactionList);
+        model.addAttribute("employees", employeeList);
+        return "enterprises/app-enterprise-view";
     }
 
 }
