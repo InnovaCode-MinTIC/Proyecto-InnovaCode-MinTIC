@@ -19,7 +19,7 @@ public class EnterpriseController {
     @GetMapping("/enterprises")
     public String ListarEmpresa(Model model){
         model.addAttribute("enterprises", service.getEnterpriseList());
-        return "EnterprisesList";
+        return "enterprises/app-enterprise-list";
     }
 
     @GetMapping("/enterprises/create")
@@ -47,7 +47,7 @@ public class EnterpriseController {
         return "redirect:/enterprises";
     }
 
-    @GetMapping("/enterprises/{id}")
+    @GetMapping("/enterprises/delete/{id}")
     public String deleteEnterprise(@PathVariable Long id) {
         service.deleteEnterprise(id);
         return  "redirect:/enterprises";

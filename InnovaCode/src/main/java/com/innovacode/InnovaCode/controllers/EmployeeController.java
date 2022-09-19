@@ -1,7 +1,11 @@
 package com.innovacode.InnovaCode.controllers;
 
 import com.innovacode.InnovaCode.entities.Employee;
+import com.innovacode.InnovaCode.entities.Enterprise;
+import com.innovacode.InnovaCode.entities.Transaction;
 import com.innovacode.InnovaCode.services.EmployeeService;
+import com.innovacode.InnovaCode.services.EnterpriseService;
+import com.innovacode.InnovaCode.services.TransactionService;
 import org.h2.engine.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,38 +19,21 @@ public class EmployeeController {
 
     @Autowired
     private EmployeeService service;
-
-//    @GetMapping("/users")
-//    public List<Employee> getEmployeeList(){
-//        return this.service.getEmployeeList();
-//    }
-//    @PostMapping("/users")
-//    public Employee postEmployee(@RequestBody Employee employee){
-//        return this.service.postEmployee(employee);
-//    }
-//    @GetMapping("/users/{id}")
-//    public Employee getEmployeeById(@PathVariable Long id){
-//        return this.service.getEmployeeById(id);
-//    }
-//    @PatchMapping("/users/{id}")
-//    public Employee patchEmployee(@PathVariable Long id,@RequestBody Employee employee){
-//        return this.service.patchEmployee(id,employee);    }
-//    @DeleteMapping("/users/{id}")
-//    public void deleteEmployee(@PathVariable Long id){
-//        this.service.deleteEmployee(id);
-//    }
+    //private EnterpriseService enterpriseService;
+    //private TransactionService transactionService;
 
     @GetMapping("/users")
     public String ListUsers(Model model){
         model.addAttribute("employees", this.service.getEmployeeList());
-        return "UsersList";
+        return "users/app-user-list";
     }
 
     @GetMapping("/users/create")
     public String FormCreateUser (Model model){
         Employee employee = new Employee();
         model.addAttribute("employee",employee);
-        return "UsersCreate";
+        return "users/app-user-create";
+        //return "UsersCreate";
     }
 
     @PostMapping("/users")
@@ -58,7 +45,8 @@ public class EmployeeController {
     @GetMapping("/users/edit/{id}")
     public String FormEditUser(@PathVariable Long id, Model model){
         model.addAttribute("employee", this.service.getEmployeeById(id));
-        return "UsersEdit";
+        return "users/app-user-edit";
+        //return "UsersEdit";
     }
 
     @PostMapping("/users/{id}")
@@ -67,9 +55,15 @@ public class EmployeeController {
         return "redirect:/users";
     }
 
-    @GetMapping("/users/{id}")
+    @GetMapping("/users/delete/{id}")
     public String deleteUser(@PathVariable Long id){
         this.service.deleteEmployee(id);
         return "redirect:/users";
+    }
+
+    @GetMapping("/users/{id}")
+    public String getUser(@PathVariable Long id, Model model){
+        model.addAttribute("employee", this.service.getEmployeeById(id));
+        return "users/app-user-view";
     }
 }

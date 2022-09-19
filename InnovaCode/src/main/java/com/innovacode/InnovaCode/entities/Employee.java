@@ -28,7 +28,7 @@ public class Employee {
     @ManyToOne
     private Enterprise enterprise;
     @JsonIgnore
-    @OneToMany(mappedBy = "employee")
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Transaction> transactions;
     @Column(name = "image")
     private String image;

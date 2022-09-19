@@ -30,10 +30,10 @@ public class Enterprise {
     @Column(name = "address")
     private String address;
     @JsonIgnore
-    @OneToMany(mappedBy = "enterprise")
+    @OneToMany(mappedBy = "enterprise", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Employee> users;
     @JsonIgnore
-    @OneToMany(mappedBy = "enterprise")
+    @OneToMany(mappedBy = "enterprise", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Transaction> transactions;
 
     @Column(name = "createdAt")
