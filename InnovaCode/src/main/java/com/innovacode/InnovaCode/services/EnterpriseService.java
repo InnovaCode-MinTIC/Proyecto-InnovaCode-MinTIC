@@ -45,5 +45,7 @@ public class EnterpriseService {
         this.repository.deleteById(id);
     }
 
-
+    public Long countEnterprise(){
+        return this.repository.count();
+    };
 }
