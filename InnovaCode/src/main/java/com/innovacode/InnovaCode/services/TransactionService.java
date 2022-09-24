@@ -58,4 +58,8 @@ public class TransactionService {
         return this.repository.findByEmployee(employee);
     }
 
+    public Long countTransaction(){
+        return this.repository.count();
+    };
+
 }

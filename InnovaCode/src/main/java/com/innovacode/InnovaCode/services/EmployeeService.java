@@ -52,4 +52,7 @@ public class EmployeeService {
         return this.repository.findByEnterprise(enterprise);
     }
 
+    public Long countEmployees(){
+        return this.repository.count();
+    };
 }
