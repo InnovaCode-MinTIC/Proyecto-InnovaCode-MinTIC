@@ -1,5 +1,6 @@
 package com.innovacode.InnovaCode.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.innovacode.InnovaCode.enums.Enum_RoleName;
 
 import javax.persistence.*;
@@ -26,8 +27,8 @@ public class Employee {
 
     @ManyToOne
     private Enterprise enterprise;
-
-    @OneToMany
+    @JsonIgnore
+    @OneToMany(mappedBy = "employee", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Transaction> transactions;
     @Column(name = "image")
     private String image;
