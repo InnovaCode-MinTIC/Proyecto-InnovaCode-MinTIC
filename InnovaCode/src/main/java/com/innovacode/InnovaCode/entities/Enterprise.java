@@ -1,5 +1,8 @@
 package com.innovacode.InnovaCode.entities;
 
+import com.fasterxml.jackson.annotation.JacksonInject;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
@@ -15,10 +18,10 @@ public class Enterprise {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
-    @Column(name = "name",unique = true)
+    @Column(name = "name", unique = true)
     private String name;
 
-    @Column(name = "document",unique = true)
+    @Column(name = "document", unique = true)
     private String document;
 
     @Column(name = "phone")
@@ -26,11 +29,11 @@ public class Enterprise {
 
     @Column(name = "address")
     private String address;
-
-    @OneToMany
+    @JsonIgnore
+    @OneToMany(mappedBy = "enterprise", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Employee> users;
-
-    @OneToMany
+    @JsonIgnore
+    @OneToMany(mappedBy = "enterprise", cascade = CascadeType.REMOVE, orphanRemoval = true)
     private List<Transaction> transactions;
 
     @Column(name = "createdAt")

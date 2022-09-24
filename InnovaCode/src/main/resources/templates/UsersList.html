@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Listado de Empleados</title>
+    <!-- CSS only -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg bg-light navbar navbar-dark bg-dark">
+    <div class="container-fluid">
+
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                        <a class="nav-link active" th:href="@{/enterprises}">Empresas</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" th:href="@{/users}">Empleados</a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link active" th:href="@{/movements}">Transacciones</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="container">
+    <div class="row">
+        <h1>Lista de Empleados</h1>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+            <a th:href="@{/users/create}" class="btn btn-primary btn-sm mb3">Agregar Empleado</a>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-lg-3">
+
+        </div>
+    </div>
+<br>
+<table class="table table-striped table-bordered">
+    <thead class="table-dark">
+    <tr>
+        <th>Id</th>
+        <th>email</th>
+        <!-- <th>Rol</th>
+        <th>Empresa</th>
+        <th>Movimientos</th> -->
+        <th>Imagen</th>
+        <th>Teléfono</th>
+        <th>CreatedAt</th>
+        <th>UpdatedAt</th>
+        <th>Acciones</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:if="${employees.empty}">
+        <td colspan="4">No hay empleados</td>
+    </tr>
+    <tr th:each="employee : ${employees}">
+        <td th:text="${employee.id}">Id</td>
+        <td th:text="${employee.email}">email</td>
+        <!-- <td th:text="${employee.role}">Rol</td>
+        <td th:text="${employee.enterprise}">Empresa</td>
+        <td th:text="${employee.transactions}">Movimientos</td> -->
+        <td th:text="${employee.image}">Imagen</td>
+        <td th:text="${employee.phone}">Teléfono</td>
+        <td th:text="${employee.createdAt}">CreatedAt</td>
+        <td th:text="${employee.updatedAt}">updatedAt</td>
+        <td>
+
+            <a th:href="@{/users/edit/{id}(id=${employee.id})}" class="btn btn-info">Editar</a>
+            <a th:href="@{/users/delete/{id}(id=${employee.id})}" class="btn btn-danger">Eliminar</a>
+
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+
+
+</body>
+</html>

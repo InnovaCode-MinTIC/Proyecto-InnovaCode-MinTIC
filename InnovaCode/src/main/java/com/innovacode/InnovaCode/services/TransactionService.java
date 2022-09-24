@@ -1,5 +1,6 @@
 package com.innovacode.InnovaCode.services;
 
+import com.innovacode.InnovaCode.entities.Employee;
 import com.innovacode.InnovaCode.entities.Enterprise;
 import com.innovacode.InnovaCode.entities.Transaction;
 import com.innovacode.InnovaCode.repositories.EnterpriseRepository;
@@ -50,4 +51,11 @@ public class TransactionService {
         enterprise.setId(id);
         return this.repository.findByEnterprise(enterprise);
     }
+
+    public List<Transaction> getTransactionByEmployee(Long id){
+        Employee employee = new Employee();
+        employee.setId(id);
+        return this.repository.findByEmployee(employee);
+    }
+
 }
