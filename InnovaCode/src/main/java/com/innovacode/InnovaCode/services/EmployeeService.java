@@ -57,4 +57,24 @@ public class EmployeeService {
         return this.repository.count();
     };
 
+    public Employee createUser(Employee newEmployee){
+        return this.repository.save(newEmployee);
+    }
+    public Employee findEmployeeByEmail(String email){
+        return this.repository.findByEmail(email);
+    }
+    public Employee getOrCreateUser(Map<String, Object> claims) {
+        String email = (String) claims.get("email");
+        Employee employee = findEmployeeByEmail(email);
+        if(employee == null){
+            String name = (String) claims.get("name");
+            String image = (String) claims.get("picture");
+            String auth0Id = (String) claims.get("sub");
+
+            Employee newEmployee = new Employee(email = email, image = image, auth0Id=auth0Id);
+            return createUser(newEmployee);
+        }
+        return employee;
+    }
+
 }

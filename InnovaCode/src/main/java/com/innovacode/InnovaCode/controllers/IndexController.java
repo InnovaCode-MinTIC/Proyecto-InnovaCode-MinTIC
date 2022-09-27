@@ -23,9 +23,10 @@ public class IndexController {
 
     @GetMapping("/")
     public String IndexListMovements(Model model, @AuthenticationPrincipal OidcUser principal){
-//        if (principal != null){
-//            User user = this.userService.getOrCreateUser(principal.getClaims());
-//        }
+        if(principal != null){
+            Employee employee = this.employeeService.getOrCreateUser(principal.getClaims());
+            model.addAttribute("user",employee);
+        }
 
         model.addAttribute("employeeCount", this.employeeService.countEmployees());
         model.addAttribute("enterpriseCount", this.enterpriseService.countEnterprise());
