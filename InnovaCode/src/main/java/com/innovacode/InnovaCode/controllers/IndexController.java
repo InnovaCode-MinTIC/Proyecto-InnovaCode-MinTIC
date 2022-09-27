@@ -1,10 +1,9 @@
 package com.innovacode.InnovaCode.controllers;
 
-import com.innovacode.InnovaCode.entities.Employee;
-import com.innovacode.InnovaCode.entities.Enterprise;
 import com.innovacode.InnovaCode.services.EmployeeService;
 import com.innovacode.InnovaCode.services.EnterpriseService;
 import com.innovacode.InnovaCode.services.TransactionService;
+import com.innovacode.InnovaCode.services.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.oauth2.core.oidc.user.OidcUser;
@@ -21,12 +20,15 @@ public class IndexController {
     @Autowired
     private TransactionService transactionService;
 
-    @GetMapping("/")
-    public String IndexListMovements(Model model, @AuthenticationPrincipal OidcUser principal){
-//        if (principal != null){
-//            User user = this.userService.getOrCreateUser(principal.getClaims());
-//        }
+    @Autowired
+    private UserService userService;
 
+    @GetMapping("/")
+    public String IndexListMovements(Model model, @AuthenticationPrincipal OidcUser principal) {
+//        if (principal != null) {
+//            User user = this.userService.getOrCreateUser(principal.getClaims());
+//            model.addAttribute("user", user);
+//        }
         model.addAttribute("employeeCount", this.employeeService.countEmployees());
         model.addAttribute("enterpriseCount", this.enterpriseService.countEnterprise());
         model.addAttribute("transactionCount", this.transactionService.countTransaction());

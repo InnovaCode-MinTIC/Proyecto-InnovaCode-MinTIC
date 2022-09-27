@@ -5,7 +5,7 @@
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width,initial-scale=1.0,user-scalable=0,minimal-ui">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0,usuario-scalable=0,minimal-ui">
     <meta name="description" content="Trabajo Mintic">
     <meta name="keywords" content="Mintic">
     <meta name="author" content="Innovacodes">
@@ -28,7 +28,7 @@
 
     <!-- BEGIN: Page CSS-->
     <link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/plugins/forms/form-validation.css}">
-    <link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/pages/app-user.css}">
+    <link rel="stylesheet" type="text/css" th:href="@{/app-assets/css/pages/app-usuario.css}">
     <!-- END: Page CSS-->
 
     <!-- BEGIN: Custom CSS-->
@@ -52,11 +52,11 @@
         </div>
         <ul class="nav navbar-nav align-items-center ms-auto">
             <li class="nav-item d-none d-lg-block"><a class="nav-link nav-link-style"><i class="ficon" data-feather="moon"></i></a></li>
-            <li class="nav-item dropdown dropdown-user"><a class="nav-link dropdown-toggle dropdown-user-link" id="dropdown-user" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    <div class="user-nav d-sm-flex d-none"><span class="user-name fw-bolder">John Doe</span><span class="user-status">Admin</span></div><span class="avatar"><img class="round" src="../app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40"><span class="avatar-status-online"></span></span>
+            <li class="nav-item dropdown dropdown-usuario"><a class="nav-link dropdown-toggle dropdown-usuario-link" id="dropdown-usuario" href="#" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    <div class="usuario-nav d-sm-flex d-none"><span class="usuario-name fw-bolder">John Doe</span><span class="usuario-status">Admin</span></div><span class="avatar"><img class="round" src="../app-assets/images/portrait/small/avatar-s-11.jpg" alt="avatar" height="40" width="40"><span class="avatar-status-online"></span></span>
                 </a>
-                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-user">
-                    <a class="dropdown-item" href="page-profile.html"><i class="me-50" data-feather="user"></i> Profile</a>
+                <div class="dropdown-menu dropdown-menu-end" aria-labelledby="dropdown-usuario">
+                    <a class="dropdown-item" href="page-profile.html"><i class="me-50" data-feather="usuario"></i> Profile</a>
                 <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="page-account-settings.html"><i class="me-50" data-feather="settings"></i> Settings</a>
                     <a class="dropdown-item" href="page-auth-login-v2.html"><i class="me-50" data-feather="power"></i> Logout</a>
@@ -113,7 +113,7 @@
                 </ul>
             </li>
 
-            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="user"></i><span class="menu-title text-truncate" data-i18n="user">Usuarios</span></a>
+            <li class=" nav-item"><a class="d-flex align-items-center" href="#"><i data-feather="usuario"></i><span class="menu-title text-truncate" data-i18n="usuario">Usuarios</span></a>
                 <ul class="menu-content">
                     <li class = "active"><a class="d-flex align-items-center" th:href="@{/users}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="List">Lista</span></a> </li>
                     <li><a class="d-flex align-items-center" th:href="@{/users/create}"><i data-feather="circle"></i><span class="menu-item text-truncate" data-i18n="Add">Añadir</span></a> </li>
@@ -139,20 +139,20 @@
             <div class="content-header row">
             </div>
             <div class="content-body">
-                <section class="app-user-view">
+                <section class="app-usuario-view">
                     <!-- User Card & Plan Starts -->
                     <div class="row">
                         <!-- User Card starts-->
                         <div class="col-xl-12 col-lg-12 col-md-12" >
-                            <div class="card user-card">
+                            <div class="card usuario-card">
                                 <div class="card-body">
                                     <div class="row">
                                         <div class="col-xl-6 col-lg-12 d-flex flex-column justify-content-between border-container-lg">
-                                            <div class="user-avatar-section">
+                                            <div class="usuario-avatar-section">
                                                 <div class="d-flex justify-content-start">
                                                     <img class="img-fluid rounded" src="../app-assets/images/avatars/7.png" height="104" width="104" alt="User avatar" />
                                                     <div class="d-flex flex-column ms-1">
-                                                        <div class="user-info mb-1">
+                                                        <div class="usuario-info mb-1">
                                                             <h4 class="mb-0" th:text="${employee.id}" >ID</h4>
                                                             <span class="card-text" th:text="${employee.email}">Email</span>
                                                         </div>
@@ -165,32 +165,32 @@
                                             </div>
                                         </div>
                                         <div class="col-xl-6 col-lg-12 mt-2 mt-xl-0">
-                                            <div class="user-info-wrapper">
+                                            <div class="usuario-info-wrapper">
                                                 <div class="d-flex flex-wrap my-50">
-                                                    <div class="user-info-title">
+                                                    <div class="usuario-info-title">
                                                         <i data-feather="check" class="me-1"></i>
-                                                        <span class="card-text user-info-title fw-bold mb-0">Status</span>
+                                                        <span class="card-text usuario-info-title fw-bold mb-0">Status</span>
                                                     </div>
                                                     <p class="card-text mb-0">Active</p>
                                                 </div>
                                                 <div class="d-flex flex-wrap my-50">
-                                                    <div class="user-info-title">
+                                                    <div class="usuario-info-title">
                                                         <i data-feather="star" class="me-1"></i>
-                                                        <span class="card-text user-info-title fw-bold mb-0">Role</span>
+                                                        <span class="card-text usuario-info-title fw-bold mb-0">Role</span>
                                                     </div>
                                                     <p class="card-text mb-0" th:text="${employee.role}" >role</p>
                                                 </div>
                                                 <div class="d-flex flex-wrap my-50">
-                                                    <div class="user-info-title">
+                                                    <div class="usuario-info-title">
                                                         <i data-feather="phone" class="me-1"></i>
-                                                        <span class="card-text user-info-title fw-bold mb-0">Contacto</span>
+                                                        <span class="card-text usuario-info-title fw-bold mb-0">Contacto</span>
                                                     </div>
                                                     <p class="card-text mb-0" th:text="${employee.phone}" >phone</p>
                                                 </div>
                                                 <div class="d-flex flex-wrap my-50">
-                                                    <div class="user-info-title">
+                                                    <div class="usuario-info-title">
                                                         <i data-feather="briefcase" class="me-1"></i>
-                                                        <span class="card-text user-info-title fw-bold mb-0">Empresa</span>
+                                                        <span class="card-text usuario-info-title fw-bold mb-0">Empresa</span>
                                                     </div>
                                                     <p class="card-text mb-0" th:text="${employee.enterprise.name}" >enterprise</p>
                                                 </div>
