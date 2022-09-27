@@ -8,6 +8,8 @@ import com.innovacode.InnovaCode.services.EnterpriseService;
 import com.innovacode.InnovaCode.services.TransactionService;
 import net.bytebuddy.asm.Advice;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,13 +27,21 @@ public class EnterpriseController {
     private TransactionService transactionService;
 
     @GetMapping("/enterprises")
-    public String ListarEmpresa(Model model){
+    public String ListarEmpresa(Model model, @AuthenticationPrincipal OidcUser principal){
+        if(principal != null){
+            Employee employee = this.employeeService.getOrCreateUser(principal.getClaims());
+            model.addAttribute("user",employee);
+        }
         model.addAttribute("enterprises", service.getEnterpriseList());
         return "enterprises/app-enterprise-list";
     }
 
     @GetMapping("/enterprises/create")
-    public String FormCreateEnterprise(Model modelo){
+    public String FormCreateEnterprise(Model modelo, @AuthenticationPrincipal OidcUser principal){
+        if(principal != null){
+            Employee employee = this.employeeService.getOrCreateUser(principal.getClaims());
+            modelo.addAttribute("user",employee);
+        }
         Enterprise enterprise = new Enterprise();
         modelo.addAttribute("enterprise", enterprise);
         return "enterprises/app-enterprise-create";
@@ -45,7 +55,11 @@ public class EnterpriseController {
     }
 
     @GetMapping("/enterprises/edit/{id}")
-    public String mostrarFormularioEditar(@PathVariable Long id, Model model) {
+    public String mostrarFormularioEditar(@PathVariable Long id, Model model, @AuthenticationPrincipal OidcUser principal) {
+        if(principal != null){
+            Employee employee = this.employeeService.getOrCreateUser(principal.getClaims());
+            model.addAttribute("user",employee);
+        }
         model.addAttribute("enterprise", service.getEnterpriseById(id));
         return "enterprises/app-enterprise-edit";
         //return "enterprisesEdit";

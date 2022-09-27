@@ -39,7 +39,16 @@ public class Employee {
     @Column(name = "updatedAt")
     private Date updatedAt;
 
+    @Column(name = "auth0Id", unique = true)
+    private String auth0Id;
+
     public Employee() {
+    }
+
+    public Employee(String email, String image, String auth0Id) {
+        this.email = email;
+        this.image = image;
+        this.auth0Id = auth0Id;
     }
 
     public Employee(long id, String email, Enum_RoleName role, String image, String phone, Enterprise enterprise, List<Transaction> transactions) {
@@ -127,6 +136,14 @@ public class Employee {
     public void setUpdatedAt() {
         LocalDateTime localDate = LocalDateTime.now(ZoneOffset.UTC);
         this.updatedAt = Date.from(localDate.toInstant(ZoneOffset.UTC));
+    }
+
+    public boolean isAdmin(){
+        String role = String.valueOf(getRole());
+        if(role.equals("Admin")){
+            return true;
+        }
+        return false;
     }
 
     @Override
