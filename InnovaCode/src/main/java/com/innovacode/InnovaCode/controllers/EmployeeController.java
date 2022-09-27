@@ -8,6 +8,8 @@ import com.innovacode.InnovaCode.services.EnterpriseService;
 import com.innovacode.InnovaCode.services.TransactionService;
 import org.h2.engine.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,13 +27,21 @@ public class EmployeeController {
     private TransactionService transactionService;
 
     @GetMapping("/users")
-    public String ListUsers(Model model){
+    public String ListUsers(Model model, @AuthenticationPrincipal OidcUser principal){
+        if(principal != null){
+            Employee employee = this.service.getOrCreateUser(principal.getClaims());
+            model.addAttribute("user",employee);
+        }
         model.addAttribute("employees", this.service.getEmployeeList());
         return "users/app-user-list";
     }
 
     @GetMapping("/users/create")
-    public String FormCreateUser (Model model){
+    public String FormCreateUser (Model model, @AuthenticationPrincipal OidcUser principal){
+        if(principal != null){
+            Employee employee = this.service.getOrCreateUser(principal.getClaims());
+            model.addAttribute("user",employee);
+        }
         Employee employee = new Employee();
         List<Enterprise> enterpriseList = enterpriseService.getEnterpriseList();
         model.addAttribute("enterpriseList", enterpriseList);
@@ -47,7 +57,11 @@ public class EmployeeController {
     }
 
     @GetMapping("/users/edit/{id}")
-    public String FormEditUser(@PathVariable Long id, Model model){
+    public String FormEditUser(@PathVariable Long id, Model model, @AuthenticationPrincipal OidcUser principal){
+        if(principal != null){
+            Employee employee = this.service.getOrCreateUser(principal.getClaims());
+            model.addAttribute("user",employee);
+        }
         model.addAttribute("employee", this.service.getEmployeeById(id));
         List<Enterprise> enterpriseList = enterpriseService.getEnterpriseList();
         model.addAttribute("enterpriseList", enterpriseList);

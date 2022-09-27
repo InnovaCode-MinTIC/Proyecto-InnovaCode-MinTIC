@@ -8,6 +8,8 @@ import com.innovacode.InnovaCode.services.EnterpriseService;
 import com.innovacode.InnovaCode.services.TransactionService;
 import org.h2.engine.Mode;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.oauth2.core.oidc.user.OidcUser;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,13 +27,21 @@ public class TransactionController {
     private EmployeeService employeeService;
 
     @GetMapping("/movements")
-    public String ListMovements(Model model){
+    public String ListMovements(Model model, @AuthenticationPrincipal OidcUser principal){
+        if(principal != null){
+            Employee employee = this.employeeService.getOrCreateUser(principal.getClaims());
+            model.addAttribute("user",employee);
+        }
         model.addAttribute("transactions", this.service.getTransactionList());
         return "transactions/app-transactions-list";
     }
 
     @GetMapping("/movements/create")
-    public String FormCreateMovement(Model model){
+    public String FormCreateMovement(Model model, @AuthenticationPrincipal OidcUser principal){
+        if(principal != null){
+            Employee employee = this.employeeService.getOrCreateUser(principal.getClaims());
+            model.addAttribute("user",employee);
+        }
         Transaction transaction = new Transaction();
         model.addAttribute("transaction",this.service.postTransaction(transaction));
         List<Enterprise> enterpriseList = enterpriseService.getEnterpriseList();
@@ -49,7 +59,12 @@ public class TransactionController {
     }
 
     @GetMapping("/movements/edit/{id}")
-    public String FormEditUser(@PathVariable Long id, Model model){
+    public String FormEditUser(@PathVariable Long id, Model model, @AuthenticationPrincipal OidcUser principal){
+        if(principal != null){
+            Employee employee = this.employeeService.getOrCreateUser(principal.getClaims());
+            model.addAttribute("user",employee);
+        }
+
         model.addAttribute("transaction", this.service.getTransactionById(id));
         List<Enterprise> enterpriseList = enterpriseService.getEnterpriseList();
         model.addAttribute("enterpriseList", enterpriseList);
